@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
             // Le premier paramètre est le nom de l'activité actuelle
             // Le second est le nom de l'activité de destination
-            Intent secondeActivite = new Intent(MainActivity.this, Defilement.class);
+            Intent secondeActivite = new Intent(MainActivity.this, Scrolling.class);
 
             // On rajoute un extra
             secondeActivite.putExtra(AGE, 31);
@@ -98,7 +98,11 @@ public class MainActivity extends AppCompatActivity
             // Puis on lance l'intent !
             startActivity(secondeActivite);
         } else if (id == R.id.nav_manage) {
-
+            // Le premier paramètre est le nom de l'activité actuelle
+            // Le second est le nom de l'activité de destination
+            Intent secondeActivite = new Intent(MainActivity.this, FacebookConnect.class);
+            // Puis on lance l'intent !
+            startActivity(secondeActivite);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

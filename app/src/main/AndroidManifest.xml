@@ -18,8 +18,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Defilement"
+            android:name=".Scrolling"
             android:label="@string/title_defilement" >
+        </activity>
+        <activity
+            android:name=".FacebookConnect"
+            android:label="@string/title_facebook" >
         </activity>
     </application>
 

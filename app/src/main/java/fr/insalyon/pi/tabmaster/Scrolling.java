@@ -1,23 +1,20 @@
 package fr.insalyon.pi.tabmaster;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toolbar;
 
 /**
  * Created by nicolas on 24/05/16.
  */
-public class Defilement extends Activity {
+public class Scrolling extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_defilement);
+        setContentView(R.layout.activity_scrolling);
 
 
         final ImageView playButton=(ImageView) findViewById(R.id.playButton);

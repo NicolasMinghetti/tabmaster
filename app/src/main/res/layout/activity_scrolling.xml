@@ -30,8 +30,6 @@
             android:layout_alignParentEnd="true"
             android:tag="Play"
             android:src="@drawable/ic_play_circle_outline_white_48dp" />
-
-
     </RelativeLayout>
 
     <TextView
