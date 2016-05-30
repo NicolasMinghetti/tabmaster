@@ -30,3 +30,7 @@ proguard/
 
 # Android Studio captures folder
 captures/
+
+#local settings file
+./idea/workspace.xml
+./idea/tasks.xml
