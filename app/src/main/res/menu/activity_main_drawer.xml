@@ -4,15 +4,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_library"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_library_music_black_24dp"
             android:title="Music Library" />
         <item
             android:id="@+id/nav_record"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_fiber_manual_record_black_24dp"
             android:title="Record a new music" />
         <item
             android:id="@+id/nav_tempory_scrolling"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_fast_forward_black_24dp"
             android:title="Tempory Scrolling Activity" />
     </group>
 
@@ -20,7 +20,7 @@
         <menu>
             <item
                 android:id="@+id/nav_facebook_connection"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_lock_open_black_24dp"
                 android:title="Connect with Facebook" />
         </menu>
     </item>

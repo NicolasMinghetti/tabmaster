@@ -27,7 +27,8 @@ public class FacebookConnect extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        //FacebookSdk.sdkInitialize(getApplicationContext());
+        //removed becouse initialized in main
         callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.facebook_connection);
