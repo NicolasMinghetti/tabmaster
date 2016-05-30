@@ -2,21 +2,20 @@ package fr.insalyon.pi.tabmaster;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * Created by nicolas on 24/05/16.
  */
 public class Scrolling extends Activity {
-    ListView liste = null;
+    GridView liste = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,17 +42,47 @@ public class Scrolling extends Activity {
         // On récupère l'intent qui a lancé cette activité
         Intent i = getIntent();
 
-        // Puis on récupère l'âge donné dans l'autre activité, ou 0 si cet extra n'est pas dans l'intent
+        // Puis on récupère le nom de la musique donné dans l'autre activité, ou 0 si cet extra n'est pas dans l'intent
         int age = i.getIntExtra(MainActivity.AGE, 0);
 
 
-        liste = (ListView) findViewById(R.id.listView);
-        List<String> exemple = new ArrayList<String>();
-        exemple.add("Item 1");
-        exemple.add("Item 2");
-        exemple.add("Item 3");
+        String string="------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-";
+        String[] parts = string.split("/");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, exemple);
-        liste.setAdapter(adapter);
+        LinearLayout parent = (LinearLayout) findViewById(R.id.ll_example);
+        parent.setOrientation(LinearLayout.VERTICAL);
+
+        TextView textView = new TextView(this);
+        LinearLayout child = new LinearLayout(this);
+
+        textView = new TextView(this);
+        textView.setText("E\nB\nG\nD\nA\nE");
+        textView.setTextSize(30);
+        textView.setTypeface(Typeface.MONOSPACE);
+        child.addView(textView);
+
+        int j=1;
+        for (String s:parts){
+
+            textView = new TextView(this);
+            textView.setText(s.charAt(0)+"\n"+s.charAt(1)+"\n"+s.charAt(2)+"\n"+s.charAt(3)+"\n"+s.charAt(4)+"\n"+s.charAt(5)+"\n");
+            textView.setTextSize(30);
+            textView.setTypeface(Typeface.MONOSPACE);
+            child.addView(textView);
+
+            if(j==14){  //Start a new line every j columns
+                parent.addView(child);
+                child = new LinearLayout(this);
+                j=0;
+
+                textView = new TextView(this);
+                textView.setText("E\nB\nG\nD\nA\nE");
+                textView.setTextSize(30);
+                textView.setTypeface(Typeface.MONOSPACE);
+                child.addView(textView);
+            }
+            j++;
+        }
+
     }
 }
