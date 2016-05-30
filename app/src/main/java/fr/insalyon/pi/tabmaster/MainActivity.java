@@ -83,11 +83,17 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            Log.d("Étiquette", "Message à envoyer");
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_library) {
+            // Go into user's library
+            // A faire UGO
+        } else if (id == R.id.nav_record) {
+            // Go into record page
+            // A faire
+        } else if (id == R.id.nav_tempory_scrolling) {
+            // A faire NICO
+
+            // Tempory page to access Scrolling Activity.
+
             // Le premier paramètre est le nom de l'activité actuelle
             // Le second est le nom de l'activité de destination
             Intent secondeActivite = new Intent(MainActivity.this, Scrolling.class);
@@ -97,18 +103,14 @@ public class MainActivity extends AppCompatActivity
 
             // Puis on lance l'intent !
             startActivity(secondeActivite);
-        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_facebook_connection) {
             // Le premier paramètre est le nom de l'activité actuelle
             // Le second est le nom de l'activité de destination
             Intent secondeActivite = new Intent(MainActivity.this, FacebookConnect.class);
             // Puis on lance l'intent !
             startActivity(secondeActivite);
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
