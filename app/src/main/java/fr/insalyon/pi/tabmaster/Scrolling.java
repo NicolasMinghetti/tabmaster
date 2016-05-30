@@ -5,12 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nicolas on 24/05/16.
  */
 public class Scrolling extends Activity {
+    ListView liste = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +46,14 @@ public class Scrolling extends Activity {
         // Puis on récupère l'âge donné dans l'autre activité, ou 0 si cet extra n'est pas dans l'intent
         int age = i.getIntExtra(MainActivity.AGE, 0);
 
-        // S'il ne s'agit pas de l'âge par défaut
-        if(age != 0)
-            // Traiter l'âge
-            age = 2;
+
+        liste = (ListView) findViewById(R.id.listView);
+        List<String> exemple = new ArrayList<String>();
+        exemple.add("Item 1");
+        exemple.add("Item 2");
+        exemple.add("Item 3");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, exemple);
+        liste.setAdapter(adapter);
     }
 }
