@@ -2,6 +2,10 @@ package fr.insalyon.pi.tabmaster;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +21,8 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
+
+import fr.insalyon.pi.tabmaster.fragments.FacebookConnectFragment;
 
 
 public class MainActivity extends AppCompatActivity
@@ -39,9 +45,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
 
     }
 
@@ -89,10 +92,12 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
 
+        Fragment fragment = null;
+        Class fragmentClass;
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        int id = menuItem.getItemId();
 
         if (id == R.id.nav_library) {
             // Go into user's library
@@ -116,14 +121,27 @@ public class MainActivity extends AppCompatActivity
             startActivity(secondeActivite);
 
         } else if (id == R.id.nav_facebook_connection) {
-            // Le premier paramètre est le nom de l'activité actuelle
-            // Le second est le nom de l'activité de destination
-            Intent secondeActivite = new Intent(MainActivity.this, FacebookConnect.class);
-            // Puis on lance l'intent !
-            startActivity(secondeActivite);
+            fragmentClass = FacebookConnectFragment.class;
         }
+
+        try {
+            fragment = (FacebookConnectFragment) new FacebookConnectFragment();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

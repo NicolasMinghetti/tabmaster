@@ -24,10 +24,6 @@
             android:name=".Scrolling"
             android:label="@string/title_defilement" >
         </activity>
-        <activity
-            android:name=".FacebookConnect"
-            android:label="@string/title_facebook" >
-        </activity>
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
