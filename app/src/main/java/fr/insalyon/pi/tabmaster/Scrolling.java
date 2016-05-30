@@ -14,7 +14,7 @@ public class Scrolling extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scrolling_activity);
+        setContentView(R.layout.scrolling_activity2);
 
 
         final ImageView playButton=(ImageView) findViewById(R.id.playButton);
