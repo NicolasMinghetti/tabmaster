@@ -29,10 +29,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="340386d9-28e1-40e1-9e3e-ae7984e75f51" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/fr/insalyon/pi/tabmaster/Scrolling.java" afterPath="$PROJECT_DIR$/app/src/main/java/fr/insalyon/pi/tabmaster/Scrolling.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity2.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity2.xml" />
     </list>
     <ignored path="Tabmaster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -112,8 +110,8 @@
       <file leaf-file-name="scrolling_activity.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.1132076">
-              <caret line="11" column="21" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state vertical-scroll-proportion="-1.1320754">
+              <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -125,10 +123,10 @@
       <file leaf-file-name="scrolling_activity2.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity2.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.69330853">
-              <caret line="35" column="61" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
+            <state vertical-scroll-proportion="0.74907064">
+              <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
               <folding>
-                <element signature="e#767#793#0" expanded="true" />
+                <element signature="e#796#822#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1810,8 +1808,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/fr/insalyon/pi/tabmaster/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/fr/insalyon/pi/tabmaster/FacebookConnect.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/fr/insalyon/pi/tabmaster/Scrolling.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity2.xml" />
       </list>
     </option>
@@ -2270,8 +2268,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="27" width="1920" height="1053" extended-state="7" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2667,17 +2665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.1132076">
-          <caret line="11" column="21" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/fr/insalyon/pi/tabmaster/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2698,12 +2685,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1320754">
+          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/scrolling_activity2.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69330853">
-          <caret line="35" column="61" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.74907064">
+          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
           <folding>
-            <element signature="e#767#793#0" expanded="true" />
+            <element signature="e#796#822#0" expanded="true" />
           </folding>
         </state>
       </provider>
