@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import fr.insalyon.pi.tabmaster.fragments.ScrollFragment;
+
 /**
  * Created by nicolas on 24/05/16.
  */
@@ -76,7 +78,7 @@ public class Scrolling extends Activity {
         Intent i = getIntent();
 
         // Puis on récupère le nom de la musique donné dans l'autre activité, ou 0 si cet extra n'est pas dans l'intent
-        int age = i.getIntExtra(MainActivity.AGE, 0);
+        int age = i.getIntExtra(ScrollFragment.AGE, 0);
 
 
         String string="444---/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-";
