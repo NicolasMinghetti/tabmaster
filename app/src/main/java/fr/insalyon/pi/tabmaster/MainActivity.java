@@ -1,12 +1,8 @@
 package fr.insalyon.pi.tabmaster;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,7 +19,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 
 import fr.insalyon.pi.tabmaster.fragments.FacebookConnectFragment;
-import fr.insalyon.pi.tabmaster.fragments.LibraryFragment;
+import fr.insalyon.pi.tabmaster.fragments.TabLibraryFragment;
 import fr.insalyon.pi.tabmaster.fragments.RecordFragment;
 import fr.insalyon.pi.tabmaster.fragments.ScrollFragment;
 
@@ -103,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             // Go into user's library
             // A faire UGO
             try {
-                fragment = new LibraryFragment().newInstance();
+                fragment = new TabLibraryFragment().newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
