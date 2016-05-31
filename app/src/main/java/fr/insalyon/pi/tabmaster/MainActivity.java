@@ -23,11 +23,13 @@ import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 
 import fr.insalyon.pi.tabmaster.fragments.FacebookConnectFragment;
+import fr.insalyon.pi.tabmaster.fragments.LibraryFragment;
+import fr.insalyon.pi.tabmaster.fragments.RecordFragment;
+import fr.insalyon.pi.tabmaster.fragments.ScrollFragment;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    public final static String AGE = "fr.insalyon.pi.tabmaster.AGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     @Override
@@ -95,40 +96,42 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem menuItem) {
 
         Fragment fragment = null;
-        Class fragmentClass;
         // Handle navigation view item clicks here.
         int id = menuItem.getItemId();
 
         if (id == R.id.nav_library) {
             // Go into user's library
             // A faire UGO
+            try {
+                fragment = new LibraryFragment().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         } else if (id == R.id.nav_record) {
-            // Go into record page
-            // A faire
+            try {
+                fragment = new RecordFragment().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (id == R.id.nav_tempory_scrolling) {
             // A faire NICO
 
             // Tempory page to access Scrolling Activity.
-
-            // Le premier paramètre est le nom de l'activité actuelle
-            // Le second est le nom de l'activité de destination
-            Intent secondeActivite = new Intent(MainActivity.this, Scrolling.class);
-
-            // On rajoute un extra
-            secondeActivite.putExtra(AGE, 31);
-
-            // Puis on lance l'intent !
-            startActivity(secondeActivite);
-
+            try {
+                fragment = new ScrollFragment().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (id == R.id.nav_facebook_connection) {
-            fragmentClass = FacebookConnectFragment.class;
+
+            try {
+                fragment = new FacebookConnectFragment().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        try {
-            fragment = (FacebookConnectFragment) new FacebookConnectFragment();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();

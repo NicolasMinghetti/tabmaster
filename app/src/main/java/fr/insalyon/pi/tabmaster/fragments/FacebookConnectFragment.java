@@ -30,6 +30,11 @@ public class FacebookConnectFragment extends android.support.v4.app.Fragment {
     private LoginButton loginButton;
     private CallbackManager callbackManager;
 
+    public static FacebookConnectFragment newInstance() {
+        FacebookConnectFragment newFragment = new FacebookConnectFragment();
+        return newFragment;
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Main view containing all the UI elements
         View view = inflater.inflate(R.layout.facebook_connection_fragment, container, false);
