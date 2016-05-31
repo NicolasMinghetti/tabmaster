@@ -36,3 +36,4 @@ captures/
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/*.iws
+app/app.iml
