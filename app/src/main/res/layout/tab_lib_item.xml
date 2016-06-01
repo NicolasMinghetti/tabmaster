@@ -7,9 +7,10 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2">
+        android:gravity="start"
+        android:layout_weight="1">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,17 +30,32 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:layout_weight="1">
+        android:layout_gravity="right">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playButton"
+            android:src="@android:drawable/ic_media_play"
+            android:layout_gravity="right"
+            android:contentDescription="@string/play_button" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right">
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/openButton"
-            android:layout_gravity="right"
             android:src="@drawable/ic_eye_open"
-            android:contentDescription="Open tab" />
+            android:contentDescription="@string/open_tab"
+            android:layout_gravity="right" />
     </FrameLayout>
+
 </LinearLayout>
+

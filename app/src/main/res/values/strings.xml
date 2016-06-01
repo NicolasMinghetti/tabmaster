@@ -8,4 +8,6 @@
     <string name="title_defilement">Défilement</string>
     <string name="title_facebook">Page de connexion facebook</string>
     <string name="connection_state">Not Connected</string>
+    <string name="play_button">Play button</string>
+    <string name="open_tab">Open tab</string>
 </resources>

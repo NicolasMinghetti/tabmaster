@@ -1,6 +1,7 @@
 package fr.insalyon.pi.tabmaster.adapters;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         private TextView titleTV;
         private TextView authorTV;
         private ImageButton openBtn;
-
+        private ImageButton playBtn;
         public ViewHolder(View itemView) {
 
             // Stores the itemView in a public final member variable that can be used
@@ -50,6 +51,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
             titleTV = (TextView) itemView.findViewById(R.id.titleTV);
             authorTV = (TextView) itemView.findViewById(R.id.authorTV);
             openBtn = (ImageButton) itemView.findViewById(R.id.openButton);
+            playBtn = (ImageButton) itemView.findViewById(R.id.playButton);
         }
     }
 
@@ -89,6 +91,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         author.setText(tab.getAuthor());
 
         ImageButton openButton = viewHolder.openBtn;
+        ImageButton playButton = viewHolder.playBtn;
     }
 
     // Return the total count of items
