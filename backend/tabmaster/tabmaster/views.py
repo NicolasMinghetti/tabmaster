@@ -1,22 +1,23 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from tabmaster.tabmaster.serializers import UserSerializer, GroupSerializer
+from tabmaster.tabmaster.serializers import MusicSerializer
+from tabmaster.tabmaster.models import Music
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'music': reverse('music-list', request=request, format=format),
+    })
+
+class MusicList(generics.ListCreateAPIView):
+    queryset = Music.objects.all()
+    serializer_class = MusicSerializer
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+class MusicDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Music.objects.all()
+    serializer_class = MusicSerializer

@@ -1,5 +1,4 @@
 """tabmaster URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.9/topics/http/urls/
 Examples:
@@ -17,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from rest_framework import routers
 from tabmaster.tabmaster import views
-from snippets import urls
+from tabmaster.tabmaster import urls
 from django.contrib import admin
 
 
