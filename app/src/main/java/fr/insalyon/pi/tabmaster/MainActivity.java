@@ -19,6 +19,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 
 import fr.insalyon.pi.tabmaster.fragments.FacebookConnectFragment;
+import fr.insalyon.pi.tabmaster.fragments.RestFragment;
 import fr.insalyon.pi.tabmaster.fragments.TabLibraryFragment;
 import fr.insalyon.pi.tabmaster.fragments.RecordFragment;
 import fr.insalyon.pi.tabmaster.fragments.ScrollFragment;
@@ -126,7 +127,13 @@ public class MainActivity extends AppCompatActivity
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (id == R.id.nav_tempory_rest) {
+            try {
+                fragment = new RestFragment().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
         }
+    }
 
 
         // Insert the fragment by replacing any existing fragment

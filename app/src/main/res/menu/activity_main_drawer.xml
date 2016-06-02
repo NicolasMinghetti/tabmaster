@@ -14,6 +14,12 @@
             android:id="@+id/nav_tempory_scrolling"
             android:icon="@drawable/ic_fast_forward_black_24dp"
             android:title="Tempory Scrolling Activity" />
+        <item
+            android:id="@+id/nav_tempory_rest"
+            android:icon="@drawable/ic_fast_forward_black_24dp"
+            android:title="Tempory Rest Activity" />
+
+
     </group>
 
     <item android:title="Communicate">

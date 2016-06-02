@@ -1,14 +1,7 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from tabmaster.tabmaster.models import Music
 
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class MusicSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups')
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('url', 'name')
+        model = Music
+        fields = ('id', 'created', 'title', 'owner', 'num_stars', 'num_stars_votes', 'tablature')
