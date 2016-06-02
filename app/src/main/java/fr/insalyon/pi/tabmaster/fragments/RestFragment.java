@@ -13,7 +13,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import fr.insalyon.pi.tabmaster.R;
-import fr.insalyon.pi.tabmaster.models.Greeting;
+import fr.insalyon.pi.tabmaster.models.Music;
 
 /**
  * Created by nicolas on 01/06/16.
@@ -36,7 +36,6 @@ public class RestFragment extends android.support.v4.app.Fragment {
 
         new HttpRequestTask().execute();
 
-
         return view;
     }
 
@@ -46,15 +45,15 @@ public class RestFragment extends android.support.v4.app.Fragment {
         ctx = getActivity();
     }
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, Greeting> {
+    private class HttpRequestTask extends AsyncTask<Void, Void, Music> {
         @Override
-        protected Greeting doInBackground(Void... params) {
+        protected Music doInBackground(Void... params) {
             try {
-                final String url = "http://rest-service.guides.spring.io/greeting";
+                final String url = "http://10.0.2.2:8000/music/1/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Greeting greeting = restTemplate.getForObject(url, Greeting.class);
-                return greeting;
+                Music music = restTemplate.getForObject(url, Music.class);
+                return music;
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);
             }
@@ -63,11 +62,11 @@ public class RestFragment extends android.support.v4.app.Fragment {
         }
 
         @Override
-        protected void onPostExecute(Greeting greeting) {
+        protected void onPostExecute(Music music) {
             TextView greetingIdText = (TextView) view.findViewById(R.id.id_value);
             TextView greetingContentText = (TextView) view.findViewById(R.id.content_value);
-            greetingIdText.setText(greeting.getId());
-            greetingContentText.setText(greeting.getContent());
+            greetingIdText.setText(String.valueOf(music.getId()));
+            greetingContentText.setText(music.getTitle());
         }
 
     }
