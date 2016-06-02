@@ -45,14 +45,14 @@ public class RestFragment extends android.support.v4.app.Fragment {
         ctx = getActivity();
     }
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, Music> {
+    private class HttpRequestTask extends AsyncTask<Void, Void, Music[]> {
         @Override
-        protected Music doInBackground(Void... params) {
+        protected Music[] doInBackground(Void... params) {
             try {
-                final String url = "http://10.0.2.2:8000/music/1/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because
+                final String url = "http://10.0.2.2:8000/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Music music = restTemplate.getForObject(url, Music.class);
+                Music[] music = restTemplate.getForObject(url, Music[].class);
                 return music;
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);
@@ -62,11 +62,11 @@ public class RestFragment extends android.support.v4.app.Fragment {
         }
 
         @Override
-        protected void onPostExecute(Music music) {
+        protected void onPostExecute(Music[] music) {
             TextView greetingIdText = (TextView) view.findViewById(R.id.id_value);
             TextView greetingContentText = (TextView) view.findViewById(R.id.content_value);
-            greetingIdText.setText(String.valueOf(music.getId()));
-            greetingContentText.setText(music.getTitle());
+            greetingIdText.setText(String.valueOf(music[1].getId()));
+            greetingContentText.setText(music[0].getTitle());
         }
 
     }
