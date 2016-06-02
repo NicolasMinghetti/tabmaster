@@ -41,4 +41,12 @@ public class Music {
     public String getTablature() {
         return this.tablature;
     }
+
+    @Override
+    public String toString() {
+        return "Music{" +
+                "id='" + id + '\'' +
+                ", owner=" + owner +
+                '}';
+    }
 }
