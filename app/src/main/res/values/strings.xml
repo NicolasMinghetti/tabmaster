@@ -8,6 +8,11 @@
     <string name="title_defilement">Défilement</string>
     <string name="title_facebook">Page de connexion facebook</string>
     <string name="connection_state">Not Connected</string>
+    <string name="id_label">The ID is</string>
+    <string name="id_value">[id]</string>
+    <string name="content_label">The Content is</string>
+    <string name="content_value">[content]</string>
+    <string name="action_refresh">Refresh</string>
     <string name="play_button">Play button</string>
     <string name="open_tab">Open tab</string>
 </resources>
