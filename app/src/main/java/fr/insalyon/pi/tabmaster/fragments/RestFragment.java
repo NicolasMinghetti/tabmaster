@@ -28,7 +28,6 @@ public class RestFragment extends android.support.v4.app.Fragment {
         return newFragment;
     }
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Main view containing all the UI elements
         view = inflater.inflate(R.layout.rest_fragment, container, false);
@@ -49,7 +48,7 @@ public class RestFragment extends android.support.v4.app.Fragment {
         @Override
         protected Music[] doInBackground(Void... params) {
             try {
-                final String url = "http://10.0.2.2:8000/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because
+                final String url = "http://10.0.2.2:8000/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Music[] music = restTemplate.getForObject(url, Music[].class);
@@ -63,13 +62,12 @@ public class RestFragment extends android.support.v4.app.Fragment {
 
         @Override
         protected void onPostExecute(Music[] music) {
-            TextView greetingIdText = (TextView) view.findViewById(R.id.id_value);
-            TextView greetingContentText = (TextView) view.findViewById(R.id.content_value);
-            greetingIdText.setText(String.valueOf(music[1].getId()));
-            greetingContentText.setText(music[0].getTitle());
+            for(Music elem : music) {
+                TextView greetingIdText = (TextView) view.findViewById(R.id.id_value);
+                TextView greetingContentText = (TextView) view.findViewById(R.id.content_value);
+                greetingIdText.setText(String.valueOf(elem.getId()));
+                greetingContentText.setText(elem.getTitle());
+            }
         }
-
     }
-
-
 }
