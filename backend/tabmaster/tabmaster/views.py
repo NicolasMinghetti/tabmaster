@@ -35,6 +35,9 @@ class MusicDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Music.objects.all()
     serializer_class = MusicSerializer
 
+# A lire https://docs.google.com/drawings/d/1oED4UF5qQqCEVgZ0Nis8xNQLS69x4HH378rAnILXBYg/edit
+# pour voir comment marche les échanges de données
+
 class TabRetrieveList(generics.ListCreateAPIView):
     serializer_class = TabRetrieveSerializer
     queryset = TabRetrieve.objects.all()
