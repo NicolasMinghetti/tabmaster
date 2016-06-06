@@ -25,3 +25,11 @@ class Music(models.Model):
 
     class Meta:
         ordering = ('num_stars',)
+
+
+class TabRetrieve(models.Model):
+    id = models.AutoField(primary_key=True)
+    data = models.CharField(max_length=1000)
+    tab = models.CharField(max_length=1000)
+    class Meta:
+        ordering = ('id',)

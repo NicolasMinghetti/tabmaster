@@ -11,6 +11,12 @@ urlpatterns = format_suffix_patterns([
     url(r'^music/(?P<pk>[0-9]+)/$',
         views.MusicDetail.as_view(),
         name='music-detail'),
+    url(r'^recup/$',
+        views.TabRetrieveList.as_view(),
+        name='tab-retrieve-list'),
+    url(r'^recup/(?P<pk>[0-9]+)/$',
+        views.TabRetrieveDetail.as_view(),
+        name='tab-retrieve-detail'),
 ])
 
 # Login and logout views for the browsable API
