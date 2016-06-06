@@ -40,5 +40,14 @@ class TabRetrieveList(generics.ListCreateAPIView):
     queryset = TabRetrieve.objects.all()
 
 class TabRetrieveDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = TabRetrieve.objects.all()
     serializer_class = TabRetrieveSerializer
+    queryset = TabRetrieve.objects.all()
+
+    def perform_update(self, serializer):
+        # Cette méthode sera appelée à chaque fois qu'un objet est màj par une requête patch
+        data=self.request.data['data']
+        print("input data :", data)
+        # ici il faut faire les calculs matlab avec data en entrée et tab en sortie
+        tab = "444---/------/--0---/------/--2---/-1--6-/-1--6-/--0---/ etc..."
+        print("output data :", tab)
+        serializer.save(tab=tab)
