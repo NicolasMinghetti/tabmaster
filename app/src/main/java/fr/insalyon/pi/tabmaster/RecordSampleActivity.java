@@ -4,27 +4,16 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 /**
  * Created by Ugo on 06/06/2016.
  */
 public class RecordSampleActivity extends AppCompatActivity {
-    private static final int RECORDER_SAMPLERATE = 44100;
-    private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
-    private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-    private AudioRecord recorder = null;
-    private Thread recordingThread = null;
-    private boolean isRecording = false;
     private AudioIn ai;
 
     @Override
@@ -34,9 +23,6 @@ public class RecordSampleActivity extends AppCompatActivity {
 
         setButtonHandlers();
         enableButtons(false);
-
-        int bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,
-                RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING);
     }
 
     private void setButtonHandlers() {
@@ -52,9 +38,6 @@ public class RecordSampleActivity extends AppCompatActivity {
         enableButton(R.id.btnStart, !isRecording);
         enableButton(R.id.btnStop, isRecording);
     }
-
-    int BufferElements2Rec = 1024; // want to play 2048 (2K) since 2 bytes we use only 1024
-    int BytesPerElement = 2; // 2 bytes in 16bit format
 
     private void startRecording() {
         ai = new AudioIn();
@@ -92,6 +75,7 @@ public class RecordSampleActivity extends AppCompatActivity {
 
 class AudioIn extends Thread {
     private boolean stopped    = false;
+    private int max = 0;
 
     AudioIn() {
 
@@ -102,8 +86,7 @@ class AudioIn extends Thread {
     public void run() {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
         AudioRecord recorder = null;
-        short[][]   buffers  = new short[256][44100];
-        int         ix       = 0;
+        short[]   buffer  = new short[44100];
 
         try { // ... initialise
 
@@ -115,13 +98,15 @@ class AudioIn extends Thread {
                     AudioFormat.ENCODING_PCM_16BIT,
                     N*10);
 
+            recorder.setPositionNotificationPeriod(44100);
+
             recorder.startRecording();
 
             // ... loop
 
-            while(!stopped) {
-                short[] buffer = buffers[ix++ % buffers.length];
 
+
+            while(!stopped) {
                 N = recorder.read(buffer,0,buffer.length);
                 process(buffer);
             }
@@ -137,7 +122,7 @@ class AudioIn extends Thread {
 
     private void process(short[] buffer){
         for(int i =0; i<buffer.length;i++){
-            Log.w("AudioIn", "Smpl[" + i +"] = " + buffer[i]);
+            //  Log.w("AudioIn", "Smpl[" + i +"] = " + buffer[i]);
         }
     }
 
