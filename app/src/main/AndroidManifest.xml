@@ -32,6 +32,10 @@
             android:name=".RecordTestActivity"
             android:label="@string/title_rectest_act" >
         </activity>
+        <activity
+            android:name=".RecordSampleActivity"
+            android:label="@string/rec_samp_act" >
+        </activity>
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"

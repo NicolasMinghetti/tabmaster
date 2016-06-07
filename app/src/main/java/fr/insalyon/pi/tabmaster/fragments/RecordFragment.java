@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import fr.insalyon.pi.tabmaster.R;
+import fr.insalyon.pi.tabmaster.RecordSampleActivity;
 import fr.insalyon.pi.tabmaster.RecordTestActivity;
 
 /**
@@ -17,11 +18,11 @@ import fr.insalyon.pi.tabmaster.RecordTestActivity;
  */
 public class RecordFragment extends android.support.v4.app.Fragment {
 
-    private TextView title;
     private Context ctx;
+    private TextView title;
     private Button recTestBtn;
-    private Button recBtn;
-    private Button playBtn;
+    private TextView title2;
+    private Button rec2Btn;
 
     public static RecordFragment newInstance() {
         RecordFragment newFragment = new RecordFragment();
@@ -35,6 +36,8 @@ public class RecordFragment extends android.support.v4.app.Fragment {
         //Instancing UI elements
         title = (TextView)view.findViewById(R.id.rec_title);
         recTestBtn = (Button)view.findViewById(R.id.rec_test_button);
+        title2 = (TextView)view.findViewById(R.id.rec2_title);
+        rec2Btn = (Button)view.findViewById(R.id.rec_test2_button);
         return view;
     }
 
@@ -48,6 +51,16 @@ public class RecordFragment extends android.support.v4.app.Fragment {
             public void onClick(View v)
             {
                 Intent nextActivity = new Intent(ctx, RecordTestActivity.class);
+                startActivity(nextActivity);
+            }
+        });
+
+        rec2Btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent nextActivity = new Intent(ctx, RecordSampleActivity.class);
                 startActivity(nextActivity);
             }
         });

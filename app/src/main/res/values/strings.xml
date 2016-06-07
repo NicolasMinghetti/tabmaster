@@ -16,4 +16,5 @@
     <string name="play_button">Play button</string>
     <string name="open_tab">Open tab</string>
     <string name="title_rectest_act">Record Test Activity</string>
+    <string name="rec_samp_act">Record Sample Activity</string>
 </resources>
