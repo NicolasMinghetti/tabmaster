@@ -4,19 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
-
-import android.widget.GridView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,9 +23,10 @@ import fr.insalyon.pi.tabmaster.fragments.ScrollFragment;
  * Created by nicolas on 24/05/16.
  */
 public class Scrolling extends Activity {
-    private ScrollView verticalScrollview;
-    private int speed               =   2;      // A adapter dans le code
-    private int verticalScrollMax   = 3280;     // A adapter à la longueur de la tablature
+    private HorizontalScrollView horizontalScrollview;
+    private int speed               =   3;      // Default speed
+    private int oldSpeed;
+    private int horizontalScrollMax   = 6280;     // A adapter à la longueur de la tablature
     private Timer scrollTimer		=	null;
     private TimerTask clickSchedule;
     private TimerTask scrollerSchedule;
@@ -44,18 +42,43 @@ public class Scrolling extends Activity {
         setContentView(R.layout.scrolling_activity2);
 
         // For verticalSrollview, from : https://github.com/blessenm/AndroidAutoScrollListView
-        verticalScrollview  =   (ScrollView) findViewById(R.id.vertical_scrollview_id2);
+        horizontalScrollview  =   (HorizontalScrollView) findViewById(R.id.horizontal_scrollview_id2);
 
-        ViewTreeObserver vto 		=	verticalScrollview.getViewTreeObserver();
+        ViewTreeObserver vto 		=	horizontalScrollview.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                verticalScrollview.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                horizontalScrollview.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 startAutoScrolling();
             }
         });
-
-
+        final ImageView rewindButton = (ImageView) findViewById(R.id.rewindButton);
+        rewindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vue) {
+                horizontalScrollview.scrollTo(0,0);
+            }
+        });
+        final Button okButton = (Button) findViewById(R.id.button);
+        final EditText bpmRate = (EditText) findViewById(R.id.bpm);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vue) {
+                int nBpmRate;
+                try
+                {
+                    nBpmRate = Integer.parseInt(String.valueOf(bpmRate.getText()));
+                }
+                catch (NumberFormatException e)
+                {
+                    nBpmRate=90;
+                }
+                Log.i("New speed set to", String.valueOf(nBpmRate));
+                speed=(int)(nBpmRate*71/2000);      // A Adapter par la suite, le nombre dépend de la largeur de l'écran du téléphone. Mais c'est suffisant pour le MVP.
+                Log.i("Speed is now", String.valueOf(speed));
+                horizontalScrollview.scrollTo(0,0);
+            }
+        });
         final ImageView playButton=(ImageView) findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,11 +87,12 @@ public class Scrolling extends Activity {
                     Log.i("Info", "Arrêter le défilement");
                     playButton.setTag("Pause");
                     playButton.setImageResource(R.drawable.ic_pause_circle_outline_white_48dp);
-                    speed=2;
+                    speed=oldSpeed;
                 } else {
                     Log.i("Info", "Remettre le défilement");
                     playButton.setTag("Play");
                     playButton.setImageResource(R.drawable.ic_play_circle_outline_white_48dp);
+                    oldSpeed=speed;
                     speed=0;
                 }
             }
@@ -85,44 +109,28 @@ public class Scrolling extends Activity {
         String[] parts = string.split("/");
 
         LinearLayout parent = (LinearLayout) findViewById(R.id.ll_example);
-        parent.setOrientation(LinearLayout.VERTICAL);
+        parent.setOrientation(LinearLayout.HORIZONTAL);
 
-        TextView textView = new TextView(this);
-        LinearLayout child = new LinearLayout(this);
-
+        TextView textView;
+        for(int j=0; j<10;j++){                 // To add some space at beginning
+            textView = new TextView(this);
+            textView.setText(" " + "\n" + " " + "\n" + " " + "\n" + " " + "\n" + " " + "\n" + " " + "\n");
+            textView.setTextSize(30);
+            textView.setTypeface(Typeface.MONOSPACE);
+            parent.addView(textView);
+        }
         textView = new TextView(this);
         textView.setText("E\nB\nG\nD\nA\nE");
         textView.setTextSize(30);
         textView.setTypeface(Typeface.MONOSPACE);
-        child.addView(textView);
-
-        List l = new LinkedList();  // LinkedList used to remove child elements from parents
-
-        int j=0;
-        for (String s:parts){
+        parent.addView(textView);
+        for (String s:parts) {
 
             textView = new TextView(this);
-            textView.setText(s.charAt(0)+"\n"+s.charAt(1)+"\n"+s.charAt(2)+"\n"+s.charAt(3)+"\n"+s.charAt(4)+"\n"+s.charAt(5)+"\n");
+            textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
             textView.setTextSize(30);
             textView.setTypeface(Typeface.MONOSPACE);
-            child.addView(textView);
-            j++;
-            if(j==14){  //Start a new line every j columns
-                l.add(child);
-                parent.addView(child);
-                child = new LinearLayout(this);
-                j=0;
-
-                textView = new TextView(this);
-                textView.setText("E\nB\nG\nD\nA\nE");
-                textView.setTextSize(30);
-                textView.setTypeface(Typeface.MONOSPACE);
-                child.addView(textView);
-            }
-        }
-        if(j!=0){   // To complete last line
-            l.add(child);
-            parent.addView(child);
+            parent.addView(textView);
         }
         //parent.removeView((LinearLayout)l.get(0));    // To remove the first tablature line
     }
@@ -148,15 +156,16 @@ public class Scrolling extends Activity {
             };
 
             scrollTimer.schedule(scrollerSchedule, 30, 30);
+
         }
     }
 
     public void moveScrollView(){
-        scrollPos							= 	(int) (verticalScrollview.getScrollY() + speed);
-        if(scrollPos >= verticalScrollMax){
+        scrollPos							= 	(int) (horizontalScrollview.getScrollX() + speed);
+        if(scrollPos >= horizontalScrollMax){
             scrollPos						=	0;
         }
-        verticalScrollview.scrollTo(0,scrollPos);
+        horizontalScrollview.scrollTo(scrollPos,0);
         //Log.e("moveScrollView","moveScrollView");
     }
 
