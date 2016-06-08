@@ -15,7 +15,7 @@ Including another URLconf
 
 from django.conf.urls import url, include
 from rest_framework import routers
-from tabmaster.tabmaster import views
+from tabmaster.comments import views
 from tabmaster.tabmaster import urls
 from django.contrib import admin
 
@@ -25,6 +25,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include(urls)),
     url(r'^admin/', admin.site.urls),
+    url(r'^facebook/', views.index, name='index')
 ]
 
 urlpatterns += [
