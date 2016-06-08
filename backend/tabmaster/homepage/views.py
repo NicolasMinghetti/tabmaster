@@ -4,4 +4,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return render(request, 'comments/facebookComments.html')
+    return render(request, 'homepage/androidHomepage.html')
