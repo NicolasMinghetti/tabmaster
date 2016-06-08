@@ -19,4 +19,5 @@
     <string name="bpm">BPM :</string>
     <string name="strongTitleDefault"><b>Dj Hamida</b> <i>Déconnecté</i></string>
     <string name="smallTitle"><i>L\'applications des musicens en herbe</i></string>
+    <string name="welcom">Pour commencer merci de vous connecter en cliquant sur Facebook dans le menu de gauche</string>
 </resources>

@@ -20,6 +20,7 @@ import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 
+import fr.insalyon.pi.tabmaster.fragments.CommentsFragment;
 import fr.insalyon.pi.tabmaster.fragments.FacebookConnectFragment;
 import fr.insalyon.pi.tabmaster.fragments.RecordFragment;
 import fr.insalyon.pi.tabmaster.fragments.RestFragment;
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_tempory_comments) {
 
             try {
-                fragment = new FacebookConnectFragment().newInstance();
+                fragment = new CommentsFragment().newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }

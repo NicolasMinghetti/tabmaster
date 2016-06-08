@@ -41,7 +41,7 @@ public class CommentsFragment extends android.support.v4.app.Fragment {
             CookieManager.getInstance().setAcceptThirdPartyCookies(mWebView, true);
 
         }
-        mWebView.loadUrl("http://tabmaster.fr:8000/facebook/");
+        mWebView.loadUrl("http://10.0.2.2:8000/facebook/");
         return view;
     }
 

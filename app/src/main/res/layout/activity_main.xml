@@ -68,8 +68,9 @@
                 android:id="@+id/smallTitle" />
             <TextView
                 android:layout_width="wrap_content"
-                android:text="Pour commencer merci de vous connecter en cliquant sur Facebook dans le menu de gauche"
+                android:text="@string/welcom"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/smallTitle"
                 android:id="@+id/loginState"/>
