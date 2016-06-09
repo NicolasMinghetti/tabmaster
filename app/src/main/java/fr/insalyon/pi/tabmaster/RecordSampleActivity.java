@@ -11,10 +11,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -92,7 +88,6 @@ public class RecordSampleActivity extends AppCompatActivity {
     class AudioIn extends Thread {
         private boolean stopped = false;
         Context act;
-        RequestQueue queue;
         final String url = "http://10.43.2.151:80/recup/";
 
 
@@ -107,7 +102,6 @@ public class RecordSampleActivity extends AppCompatActivity {
 
             AudioRecord recorder = null;
             short[] buffer = new short[44100];
-            queue = Volley.newRequestQueue(act);
 
             try { // ... initialise
 
@@ -145,7 +139,7 @@ public class RecordSampleActivity extends AppCompatActivity {
             }
         }
 
-        private void process(short[] buffer, HttpURLConnection urlCon) throws AuthFailureError {
+        private void process(short[] buffer, HttpURLConnection urlCon) {
             String dataToSend = "";
             dataToSend = Arrays.toString(buffer);
             //dataToSend = dataToSend.replaceAll(" ", "").replace("[", "").replace("]", "");
