@@ -22,6 +22,8 @@ import fr.insalyon.pi.tabmaster.models.TabRessource;
 /**
  * Created by Ugo on 31/05/2016.
  */
+
+//TODO adapter à Music model
 public class TabLibraryFragment extends android.support.v4.app.Fragment {
 
     private ArrayList<TabRessource> tabs;
@@ -74,7 +76,7 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
         private Drawable mDivider;
 
         public Divider(Context context) {
-            ResourcesCompat.getDrawable(getResources(), R.drawable.line_divider, null);
+            mDivider = ResourcesCompat.getDrawable(getResources(), R.drawable.line_divider, null);
         }
 
         @Override
