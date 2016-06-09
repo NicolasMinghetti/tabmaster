@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
 
         connection();
         home();
+
     }
 
     @Override
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity
         boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
         if(loggedIn){
             connection_state= (TextView)findViewById(R.id.connection_state_nav);
-            connection_state.setText(Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
+            //connection_state.setText(Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
         }
 
         return true;
@@ -149,6 +150,27 @@ public class MainActivity extends AppCompatActivity
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (id == R.id.home) {
+
+            try {
+                setContentView(R.layout.activity_main);
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                drawer.setDrawerListener(toggle);
+                toggle.syncState();
+
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                navigationView.setNavigationItemSelectedListener(this);
+                connection();
+                home();
+                return true;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -208,5 +230,9 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    }
+    public static MainActivity newInstance() {
+        MainActivity newFragment = new MainActivity();
+        return newFragment;
     }
 }

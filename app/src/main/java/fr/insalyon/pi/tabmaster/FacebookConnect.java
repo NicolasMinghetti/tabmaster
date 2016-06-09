@@ -5,9 +5,12 @@ package fr.insalyon.pi.tabmaster;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -23,7 +26,10 @@ public class FacebookConnect extends Activity {
 
     private TextView info;
     private LoginButton loginButton;
+    private Button btn;
     private CallbackManager callbackManager;
+    Context ctx;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,19 +45,28 @@ public class FacebookConnect extends Activity {
         if(loggedIn){
             Log.i("Profile info", Profile.getCurrentProfile().getLastName());
         }
+        ctx = getApplicationContext();
+        final Button returnButton = (Button)findViewById(R.id.returnButton);
+        returnButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // Le premier paramètre est le nom de l'activité actuelle
+                // Le second est le nom de l'activité de destination
+                Intent secondeActivite = new Intent(ctx, MainActivity.class);
+                // Puis on lance l'intent !
+                startActivity(secondeActivite);
+            }
+        });
+
         loginButton = (LoginButton)findViewById(R.id.login_button);
         //source : http://code.tutsplus.com/tutorials/quick-tip-add-facebook-login-to-your-android-app--cms-23837
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
-                info.setText(
-                        "User ID: "
-                                + loginResult.getAccessToken().getUserId()
-                                + "\n" +
-                                "Auth Token: "
-                                + loginResult.getAccessToken().getToken()
-                );
+                info.setText("Vous êtes mainenant connectés !");
+                returnButton.setVisibility(View.VISIBLE);
             }
 
             @Override
