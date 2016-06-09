@@ -3,8 +3,11 @@ package fr.insalyon.pi.tabmaster.fragments;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 
@@ -32,6 +38,7 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public static TabLibraryFragment newInstance() {
         TabLibraryFragment newFragment = new TabLibraryFragment();
@@ -51,6 +58,22 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
         //Main view containing all the UI elements
         View view = inflater.inflate(R.layout.tab_library_fragment, container, false);
 
+        //Instancing UI elements
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        mSwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.i("TabLibFgt", "onRefresh called from SwipeRefreshLayout");
+
+                        // This method performs the actual data-refresh operation.
+                        // The method calls setRefreshing(false) when it's finished.
+                        new HttpUpdateTabLib().execute();
+                        mSwipeRefreshLayout.setRefreshing(false); //to use ine updateOperation
+                    }
+                }
+        );
+
         //Instancing recycler view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.tab_lib_recycle_view);
         Log.d("TabLibraryFragment", "PASSED : RecyclerView instantiated");
@@ -69,6 +92,34 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
+    private class HttpUpdateTabLib extends AsyncTask<Void, Void, Music[]> {
+        @Override
+        protected Music[] doInBackground(Void... params) {
+            try {
+                final String url = "http://10.0.2.2:8000/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Music[] music = restTemplate.getForObject(url, Music[].class);
+                return music;
+            } catch (Exception e) {
+                Log.e("TabLibFragment", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Music[] music) {
+            if(music != null) {
+                for (Music elem : music) {
+                    System.out.println(String.valueOf(elem.getId()));
+                    System.out.println(elem.getTitle());
+                }
+            }
+            mSwipeRefreshLayout.setRefreshing(false);
+
+        }
+    }
 
     //Define item decoration : line divider
     public class Divider extends RecyclerView.ItemDecoration {
@@ -97,4 +148,5 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
             }
         }
     }
+
 }
