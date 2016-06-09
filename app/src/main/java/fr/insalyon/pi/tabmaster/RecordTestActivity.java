@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.io.IOException;
@@ -20,6 +21,10 @@ import java.io.IOException;
 public class RecordTestActivity extends AppCompatActivity{
         private static final String LOG_TAG = "RecordTestActivity";
         private static String mFileName = null;
+        private String recordName = null;
+
+        private EditText mEdit = null;
+        private Button okBtn = null;
 
         private RecordButton mRecordButton = null;
         private MediaRecorder mRecorder = null;
@@ -127,7 +132,7 @@ public class RecordTestActivity extends AppCompatActivity{
 
     public RecordTestActivity() {
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFileName += "/audiorecordtest.3gp";
+        mFileName += "/tabtest/audiorecordtest.3gp";
     }
 
     @Override
@@ -135,6 +140,31 @@ public class RecordTestActivity extends AppCompatActivity{
         super.onCreate(icicle);
 
         LinearLayout ll = new LinearLayout(this);
+        mEdit = new EditText(this);
+        ll.addView(mEdit,
+                new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        0));
+        okBtn = new Button(this);
+        okBtn.setText("OK");
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                recordName = mEdit.getText().toString();
+                mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
+                mFileName += "/tabtest/";
+                mFileName += recordName;
+                mFileName += ".3gpp";
+
+            }
+        });
+        ll.addView(okBtn,
+                new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        0));
+
+        LinearLayout ll2 = new LinearLayout(this);
         mRecordButton = new RecordButton(this);
         ll.addView(mRecordButton,
                 new LinearLayout.LayoutParams(
@@ -142,12 +172,15 @@ public class RecordTestActivity extends AppCompatActivity{
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         0));
         mPlayButton = new PlayButton(this);
-        ll.addView(mPlayButton,
+        /*ll.addView(mPlayButton,
                 new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
-                        0));
+                        0));*/
+
         setContentView(ll);
+        //setContentView(ll2);
+
     }
 
     @Override
