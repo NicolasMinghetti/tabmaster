@@ -29,6 +29,10 @@
             android:label="@string/title_defilement" >
         </activity>
         <activity
+            android:name=".FacebookConnect"
+            android:label="@string/title_facebook" >
+        </activity>
+        <activity
             android:name=".RecordTestActivity"
             android:label="@string/title_rectest_act" >
         </activity>

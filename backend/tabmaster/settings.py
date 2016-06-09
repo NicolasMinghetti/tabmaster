@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'tabmaster'
+    'tabmaster',
+    'tabmaster.comments',
+    'tabmaster.homepage',
 ]
 
 MIDDLEWARE_CLASSES = [

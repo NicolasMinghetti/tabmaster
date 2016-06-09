@@ -1,28 +1,31 @@
 package fr.insalyon.pi.tabmaster;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 
+import fr.insalyon.pi.tabmaster.fragments.CommentsFragment;
 import fr.insalyon.pi.tabmaster.fragments.FacebookConnectFragment;
-import fr.insalyon.pi.tabmaster.fragments.RestFragment;
-import fr.insalyon.pi.tabmaster.fragments.TabLibraryFragment;
 import fr.insalyon.pi.tabmaster.fragments.RecordFragment;
+import fr.insalyon.pi.tabmaster.fragments.RestFragment;
 import fr.insalyon.pi.tabmaster.fragments.ScrollFragment;
+import fr.insalyon.pi.tabmaster.fragments.TabLibraryFragment;
 
 
 public class MainActivity extends AppCompatActivity
@@ -35,7 +38,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -132,12 +134,27 @@ public class MainActivity extends AppCompatActivity
                 fragment = new RestFragment().newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        } else if (id == R.id.nav_tempory_comments) {
+
+            try {
+                fragment = new CommentsFragment().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-    }
 
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
+        ImageView imageView = (ImageView) findViewById(R.id.profile);
+        imageView.setVisibility(View.INVISIBLE);
+        TextView title = (TextView) findViewById(R.id.tabmasterTitle);
+        title.setVisibility(View.INVISIBLE);
+        TextView smallTitle= (TextView) findViewById(R.id.smallTitle);
+        smallTitle.setVisibility(View.INVISIBLE);
+        TextView loginState = (TextView) findViewById(R.id.loginState);
+        loginState.setVisibility(View.INVISIBLE);
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
