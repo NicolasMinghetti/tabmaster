@@ -23,7 +23,6 @@ import java.util.Arrays;
  */
 public class RecordSampleActivity extends AppCompatActivity {
     private AudioIn ai;
-    Context ctx;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +87,7 @@ public class RecordSampleActivity extends AppCompatActivity {
     class AudioIn extends Thread {
         private boolean stopped = false;
         Context act;
-        final String url = "http://10.43.2.151:80/recup/";
+        final String url = "http://10.43.2.151:80/recup";
 
 
         AudioIn(AppCompatActivity parent) {
@@ -100,7 +99,7 @@ public class RecordSampleActivity extends AppCompatActivity {
         public void run() {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
 
-            AudioRecord recorder = null;
+            AudioRecord recorder;
             short[] buffer = new short[44100];
 
             try { // ... initialise
@@ -117,17 +116,11 @@ public class RecordSampleActivity extends AppCompatActivity {
                 recorder.setPositionNotificationPeriod(44100);
                 recorder.startRecording();
 
-                //set connection
-                URL urlObj = new URL(url);
-                HttpURLConnection urlCon = (HttpURLConnection) urlObj.openConnection();
-                //add request header
-                urlCon.setRequestMethod("POST");
-
 
                 // ... loop
                 while (!stopped) {
                     N = recorder.read(buffer, 0, buffer.length);
-                    process(buffer, urlCon);
+                    process(buffer);
                 }
 
                 recorder.stop();
@@ -139,13 +132,18 @@ public class RecordSampleActivity extends AppCompatActivity {
             }
         }
 
-        private void process(short[] buffer, HttpURLConnection urlCon) {
+        private void process(short[] buffer) {
             String dataToSend = "";
             dataToSend = Arrays.toString(buffer);
-            //dataToSend = dataToSend.replaceAll(" ", "").replace("[", "").replace("]", "");
+            dataToSend = dataToSend.replaceAll(" ", "").replace("[", "").replace("]", "");
             System.out.println(Arrays.toString(buffer));
 
             try{
+                //set connection
+                URL urlObj = new URL(url);
+                HttpURLConnection urlCon = (HttpURLConnection) urlObj.openConnection();
+                //add request header
+                urlCon.setRequestMethod("POST");
 
                 // Send post request
                 byte[] outputInBytes = dataToSend.getBytes("UTF-8");
