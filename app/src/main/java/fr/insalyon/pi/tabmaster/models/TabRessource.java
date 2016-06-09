@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by Ugo on 31/05/2016.
  */
 
+//TODO Fusionner avec Music
 //Object defining a tab item
 public class TabRessource {
     private String title;

@@ -22,6 +22,7 @@ import fr.insalyon.pi.tabmaster.fragments.ScrollFragment;
 /**
  * Created by nicolas on 24/05/16.
  */
+//TODO Intégrer en tant que fragment ?
 public class Scrolling extends Activity {
     private HorizontalScrollView horizontalScrollview;
     private int speed               =   3;      // Default speed

@@ -21,6 +21,11 @@ import java.util.Arrays;
 
 /* Created by Ugo on 06/06/2016.
  */
+
+//TODO NETTOYER CE FOUTRE
+//TODO Intégrer en tant que fragment
+//TODO Récupérer la tab renvoyée par le serveur
+//TODO Fenêtre enregistrer la tablature avec Titre etc.
 public class RecordSampleActivity extends AppCompatActivity {
     private AudioIn ai;
 

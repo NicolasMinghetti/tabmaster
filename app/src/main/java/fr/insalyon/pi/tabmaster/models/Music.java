@@ -8,6 +8,9 @@ import java.util.Date;
  */
 public class Music {
 
+    //TODO Fusionner avec TabRessource
+    //TODO Associer audio file et tab
+
     private int id;
     private Date created;
     private String title;

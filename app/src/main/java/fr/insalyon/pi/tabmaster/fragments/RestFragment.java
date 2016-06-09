@@ -18,6 +18,7 @@ import fr.insalyon.pi.tabmaster.models.Music;
 /**
  * Created by nicolas on 01/06/16.
  */
+//TODO A supprimer ?
 public class RestFragment extends android.support.v4.app.Fragment {
 
 

@@ -18,6 +18,7 @@ import java.io.IOException;
 /**
  * Created by Ugo on 02/06/2016.
  */
+//TODO Intégrer en tant que fragment
 public class RecordTestActivity extends AppCompatActivity{
         private static final String LOG_TAG = "RecordTestActivity";
         private static String mFileName = null;
