@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         connection();
-        home();
 
     }
 
@@ -70,14 +69,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        // Get users lastname if connected with facebook
-        TextView connection_state;
-        boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
-        if(loggedIn){
-            connection_state= (TextView)findViewById(R.id.connection_state_nav);
-            //connection_state.setText(Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
-        }
-
         return true;
     }
 
@@ -165,7 +156,6 @@ public class MainActivity extends AppCompatActivity
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                 navigationView.setNavigationItemSelectedListener(this);
                 connection();
-                home();
                 return true;
 
             } catch (Exception e) {
@@ -221,18 +211,5 @@ public class MainActivity extends AppCompatActivity
             Log.i("Connection State", String.valueOf(loggedIn));
             connection_state.setText(R.string.welcom);
         }
-
-    }
-
-    public void home() {
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        //imageView.setOnClickListener(this);
-
-
-
-    }
-    public static MainActivity newInstance() {
-        MainActivity newFragment = new MainActivity();
-        return newFragment;
     }
 }

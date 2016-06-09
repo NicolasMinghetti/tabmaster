@@ -33,7 +33,7 @@
 
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Réglages">
         <menu>
             <item
                 android:id="@+id/nav_facebook_connection"
