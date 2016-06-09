@@ -1,14 +1,12 @@
-Pour faire marcher serveur Python:
+Installation du serveur:
+	
+	prérequis:  nginx installé
 
--Créer un environnement virtuel appelé myvenv
-http://tutorial.djangogirls.org/en/installation/
+Tout se fait à partir du dossier dans lequel se trouve ce fichier README
 
--Installer django + django-rest ... (pip install ...)
-
--Faire un python manage.py makemigrations
-et python manage.py migrate au début.
-
--Puis faire un python manage.py makemigrations tabmaster
-et python manage.py migrate tabmaster.
-
--Puis lancer le serveur en faisant python manage.py runserver
+étape 1) modifier DJANGODIR et SOCKFILE de VirtualEnv/bin/gunicorn_start pour les adapter à l'arboréscence.
+étape 2) modifier les routes de la socket (l3) et du dossier des statics files (l14) dans nginxFiles/tabmaster
+étape 3) dans le même fichier mettre l'adresse ip valide de l'ordinateur (l9) 
+étape 4) mettre dans le fichier site-available du répertoire d'installation de nginx le fichier nginxFiles/tabmaster
+étape 5) créer un lien symbolique vers le fichier tabmaster (dans site-available) dans le répertoir site-enable du répertoire de nginx
+étape 5) une fois nginx lancé (sudo service nginx start), tapé la commande suivante  "sudo VirtualEnv/bin/gunicorn_start"
