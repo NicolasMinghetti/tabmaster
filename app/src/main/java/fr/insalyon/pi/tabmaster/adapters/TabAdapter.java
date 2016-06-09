@@ -13,8 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.insalyon.pi.tabmaster.R;
-import fr.insalyon.pi.tabmaster.models.TabRessource;
-
+import fr.insalyon.pi.tabmaster.models.Music;
 /**
  * Created by Ugo on 31/05/2016.
  */
@@ -25,7 +24,7 @@ import fr.insalyon.pi.tabmaster.models.TabRessource;
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
     // Store a member variable for the tabs
-    private List<TabRessource> mTabs;
+    private List<Music> mTabs;
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -58,11 +57,8 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
     }
 
     // Pass in the tab array into the constructor
-    public TabAdapter(List<TabRessource> tabs) {
-        Log.d("TabAdapter", "Getting tabs list...");
-        Log.d("TabAdapter", "Got tab list from fragment : " + tabs.get(12).getAuthor());
+    public TabAdapter(List<Music> tabs) {
         mTabs = tabs;
-        Log.d("TabAdapter", "PASSED : tabs list caught : " + mTabs.get(12).getAuthor());
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -83,14 +79,14 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(TabAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        TabRessource tab = mTabs.get(position);
+        Music tab = mTabs.get(position);
 
         // Set item views based on the data model
         TextView title = viewHolder.titleTV;
         title.setText(tab.getTitle());
 
         TextView author = viewHolder.authorTV;
-        author.setText(tab.getAuthor());
+        author.setText(tab.getOwner());
 
         ImageButton openButton = viewHolder.openBtn;
         ImageButton playButton = viewHolder.playBtn;

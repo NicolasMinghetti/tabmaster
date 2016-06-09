@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import fr.insalyon.pi.tabmaster.R;
 import fr.insalyon.pi.tabmaster.adapters.TabAdapter;
-import fr.insalyon.pi.tabmaster.models.TabRessource;
+import fr.insalyon.pi.tabmaster.models.Music;
 
 /**
  * Created by Ugo on 31/05/2016.
@@ -26,7 +26,7 @@ import fr.insalyon.pi.tabmaster.models.TabRessource;
 //TODO adapter à Music model
 public class TabLibraryFragment extends android.support.v4.app.Fragment {
 
-    private ArrayList<TabRessource> tabs;
+    private ArrayList<Music> tabs;
     private TextView title;
     private Context ctx;
     private RecyclerView mRecyclerView;
@@ -45,14 +45,11 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        tabs = TabRessource.createTabsList(20);
-        Log.d("TabLibraryFragment", "PASSED : tabs list created : " + tabs.get(12).getAuthor());
+        //Test object list
+        tabs = Music.createTabsList(20);
 
         //Main view containing all the UI elements
         View view = inflater.inflate(R.layout.tab_library_fragment, container, false);
-
-        //Instancing UI elements
-        title = (TextView)view.findViewById(R.id.tab_lib_title);
 
         //Instancing recycler view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.tab_lib_recycle_view);
@@ -72,6 +69,8 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
+
+    //Define item decoration : line divider
     public class Divider extends RecyclerView.ItemDecoration {
         private Drawable mDivider;
 
