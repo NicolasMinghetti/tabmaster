@@ -31,7 +31,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/info"
+        android:layout_gravity="center"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:textSize="18sp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/returnButton"
+        android:layout_gravity="center"
+        android:text="Retourner sur la page d'accueil" />
 </LinearLayout>

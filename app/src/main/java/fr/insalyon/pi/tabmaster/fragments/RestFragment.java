@@ -51,8 +51,11 @@ public class RestFragment extends android.support.v4.app.Fragment {
             try {
                 final String url = "http://10.0.2.2:8000/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
                 RestTemplate restTemplate = new RestTemplate();
+                Log.i("la","la");
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Log.i("la","la2");
                 Music[] music = restTemplate.getForObject(url, Music[].class);
+                Log.i("la","la3");
                 return music;
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);
