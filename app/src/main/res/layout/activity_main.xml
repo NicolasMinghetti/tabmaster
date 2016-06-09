@@ -74,6 +74,13 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/smallTitle"
                 android:id="@+id/loginState"/>
+            <Button
+                android:layout_below="@id/loginState"
+                android:text="Se connecter avec Facebook..."
+                android:layout_centerHorizontal="true"
+                android:id="@+id/facebook_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
         <!--</ScrollView>-->
 

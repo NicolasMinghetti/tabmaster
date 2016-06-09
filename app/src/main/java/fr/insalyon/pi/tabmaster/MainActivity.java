@@ -1,5 +1,7 @@
 package fr.insalyon.pi.tabmaster;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,8 +32,9 @@ import fr.insalyon.pi.tabmaster.fragments.TabLibraryFragment;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+    Context ctx;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        connection();
+        home();
     }
 
     @Override
@@ -65,9 +72,7 @@ public class MainActivity extends AppCompatActivity
         // Get users lastname if connected with facebook
         TextView connection_state;
         boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
-        Log.i("Connection State:", String.valueOf(loggedIn));
         if(loggedIn){
-            Log.i("Profile info", Profile.getCurrentProfile().getLastName());
             connection_state= (TextView)findViewById(R.id.connection_state_nav);
             connection_state.setText(Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
         }
@@ -124,6 +129,8 @@ public class MainActivity extends AppCompatActivity
             }
         } else if (id == R.id.nav_facebook_connection) {
 
+            /*Intent secondeActivite = new Intent(ctx, FacebookConnect.class);
+            startActivity(secondeActivite);*/
             try {
                 fragment = new FacebookConnectFragment().newInstance();
             } catch (Exception e) {
@@ -155,6 +162,9 @@ public class MainActivity extends AppCompatActivity
         smallTitle.setVisibility(View.INVISIBLE);
         TextView loginState = (TextView) findViewById(R.id.loginState);
         loginState.setVisibility(View.INVISIBLE);
+        Button btn = (Button) findViewById(R.id.facebook_btn);
+        btn.setVisibility(View.INVISIBLE);
+
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
@@ -167,4 +177,36 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onClick(View v) {
+        Intent secondeActivite = new Intent(ctx, FacebookConnect.class);
+        startActivity(secondeActivite);
+    }
+
+    public void connection() {
+        ctx = getApplicationContext();
+        boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
+
+        TextView connection_state= (TextView)findViewById(R.id.loginState);
+        Button btn = (Button) findViewById(R.id.facebook_btn);
+        btn.setOnClickListener(this);
+        if(loggedIn){
+            btn.setVisibility(View.INVISIBLE);
+            Log.i("User connected, profile", Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
+            connection_state.setText("Bonjour "+Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
+        } else {
+            btn.setVisibility(View.VISIBLE);
+            Log.i("Connection State", String.valueOf(loggedIn));
+            connection_state.setText(R.string.welcom);
+        }
+
+    }
+
+    public void home() {
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        //imageView.setOnClickListener(this);
+
+
+
+    }
 }
