@@ -1,0 +1,11 @@
+Installation du serveur:
+	
+	prérequis:  nginx installé
+
+Tout se fait à partir du dossier dans lequel se trouve ce fichier README
+
+étape 1) modifier DJANGODIR et SOCKFILE de VirtualEnv/bin/gunicorn_start pour les adapter à l'arboréscence.
+étape 2) modifier les routes de la socket (l3) et du dossier des statics files (l14) dans nginxFiles/tabmaster
+étape 3) dans le même fichier mettre l'adresse ip valide de l'ordinateur (l9) 
+étape 4) mettre dans le fichier site-available du répertoire d'installation de nginx le fichier nginxFiles/tabmaster
+étape 5) une fois nginx lancé (sudo service nginx start), tapé la commande suivante  "sudo VirtualEnv/bin/gunicorn_start"

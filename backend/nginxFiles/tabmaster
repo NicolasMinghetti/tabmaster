@@ -1,0 +1,23 @@
+upstream tabmaster {
+    
+    server unix:/home/mperrier/PI/serveurBack/tabmasterGit/tabmaster/backend/socketFile/gunicorn.sock fail_timeout=0;
+}
+
+
+server {
+    listen 80;
+    server_name 10.43.2.151;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    
+	location /static {
+        root /home/mperrier/PI/serveurBack/tabmasterGit/tabmaster/backend/virtualEnv/lib/python3.4/site-packages/rest_framework;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass  http://tabmaster;
+    }
+
+	
+}
