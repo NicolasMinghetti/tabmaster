@@ -1,7 +1,9 @@
 package fr.insalyon.pi.tabmaster.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.insalyon.pi.tabmaster.R;
+import fr.insalyon.pi.tabmaster.Scrolling;
 import fr.insalyon.pi.tabmaster.models.MusicAppli;
 
 /**
@@ -24,6 +27,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
     // Store a member variable for the tabs
     private List<MusicAppli> mTabs;
+    private static Context context;
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -34,20 +38,26 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         private TextView authorTV;
         private ImageButton openBtn;
         private ImageButton playBtn;
+
         public ViewHolder(View itemView) {
 
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
+            context = itemView.getContext();
 
             // Define click listener for the ViewHolder's View.
-            /*
-            v.setOnClickListener(new View.OnClickListener() {
+
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.i("cliqué","click");
+
                 }
             });
-            */
+
             titleTV = (TextView) itemView.findViewById(R.id.titleTV);
             authorTV = (TextView) itemView.findViewById(R.id.authorTV);
             openBtn = (ImageButton) itemView.findViewById(R.id.openButton);
@@ -89,6 +99,19 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
         ImageButton openButton = viewHolder.openBtn;
         ImageButton playButton = viewHolder.playBtn;
+
+        final String tablature=tab.getTablature();
+        viewHolder.playBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent;
+                intent =  new Intent(context, Scrolling.class);
+                intent.putExtra("MusicTablature", tablature);
+
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     // Return the total count of items

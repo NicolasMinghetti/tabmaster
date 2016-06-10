@@ -42,6 +42,20 @@ public class Scrolling extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scrolling_activity2);
 
+
+        String newString;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newString= null;
+            } else {
+                newString= extras.getString("MusicTablature");
+            }
+        } else {
+            newString= (String) savedInstanceState.getSerializable("MusicTablature");
+        }
+        System.out.println(newString);
+
         // For verticalSrollview, from : https://github.com/blessenm/AndroidAutoScrollListView
         horizontalScrollview  =   (HorizontalScrollView) findViewById(R.id.horizontal_scrollview_id2);
 
