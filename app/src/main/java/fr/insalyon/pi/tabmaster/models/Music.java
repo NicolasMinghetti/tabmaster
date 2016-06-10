@@ -53,4 +53,17 @@ public class Music {
                 ", owner=" + owner +
                 '}';
     }
+
+    private static int lastTabID = 0;
+
+    public static ArrayList<Music> createTabsList(int nbTabs) {
+        ArrayList<Music> tabs = new ArrayList<Music>();
+
+        for (int i = 1; i <= nbTabs; i++) {
+            tabs.add(new Music());
+        }
+
+        return tabs;
+    }
+
 }

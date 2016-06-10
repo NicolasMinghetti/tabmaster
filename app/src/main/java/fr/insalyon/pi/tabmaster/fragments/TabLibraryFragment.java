@@ -31,7 +31,7 @@ import fr.insalyon.pi.tabmaster.models.Music;
 //TODO adapter à Music model
 public class TabLibraryFragment extends android.support.v4.app.Fragment {
 
-    private ArrayList<Music> tabs;
+    private ArrayList<Music> tabs =new ArrayList<Music>();
     private TextView title;
     private Context ctx;
     private RecyclerView mRecyclerView;
@@ -52,7 +52,9 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Test object list
-        //tabs = Music.createTabsList(20);
+        tabs = Music.createTabsList(1);
+        new HttpUpdateTabLib().execute();
+        //tabs.add(new Music());
 
         //Main view containing all the UI elements
         View view = inflater.inflate(R.layout.tab_library_fragment, container, false);
@@ -98,8 +100,8 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
                 final String url = "http://10.0.2.2:8000/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Music[] tabs = restTemplate.getForObject(url, Music[].class);
-                return tabs;
+                Music[] tabslocal = restTemplate.getForObject(url, Music[].class);
+                return tabslocal;
             } catch (Exception e) {
                 Log.e("TabLibFragment", e.getMessage(), e);
             }
@@ -111,8 +113,9 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
         protected void onPostExecute(Music[] music) {
             if(music != null) {
                 for (Music elem : music) {
-                    System.out.println(String.valueOf(elem.getId()));
-                    System.out.println(elem.getTitle());
+                    System.out.println("Music:"+String.valueOf(elem.getId()));
+                    System.out.println("Music:"+elem.getTitle());
+                    tabs.add(elem);
                 }
             }
             mSwipeRefreshLayout.setRefreshing(false);
