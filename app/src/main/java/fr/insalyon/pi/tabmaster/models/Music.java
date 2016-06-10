@@ -19,6 +19,8 @@ public class Music {
     private DecimalFormat num_stars;
     private int num_stars_votes;
     private String tablature;
+    private String author;
+
 
     public int getId() {
         return this.id;
@@ -46,6 +48,12 @@ public class Music {
         return this.tablature;
     }
 
+
+    public Music (String newTitle, String newAuthor){
+        title = newTitle;
+        author = newAuthor;
+    }
+
     @Override
     public String toString() {
         return "Music{" +
@@ -60,7 +68,7 @@ public class Music {
         ArrayList<Music> tabs = new ArrayList<Music>();
 
         for (int i = 1; i <= nbTabs; i++) {
-            tabs.add(new Music());
+            tabs.add(new Music("Tab n°" + ++lastTabID, "Author n°" + lastTabID/2));
         }
 
         return tabs;

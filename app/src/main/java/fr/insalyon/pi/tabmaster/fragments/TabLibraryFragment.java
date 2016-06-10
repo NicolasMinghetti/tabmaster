@@ -53,7 +53,7 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Test object list
         tabs = Music.createTabsList(1);
-        new HttpUpdateTabLib().execute();
+        //new HttpUpdateTabLib().execute();
         //tabs.add(new Music());
 
         //Main view containing all the UI elements
@@ -86,6 +86,7 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
         Log.d("TabLibraryFragment", "PASSED : LayoutManager set");
         // specify an adapter
         mAdapter = new TabAdapter(tabs);
+        System.out.print(tabs);
         mRecyclerView.setAdapter(mAdapter);
         Log.d("TabLibraryFragment", "PASSED : TabAdapter set");
 
@@ -115,7 +116,7 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
                 for (Music elem : music) {
                     System.out.println("Music:"+String.valueOf(elem.getId()));
                     System.out.println("Music:"+elem.getTitle());
-                    tabs.add(elem);
+                    //tabs.add(elem);
                 }
             }
             mSwipeRefreshLayout.setRefreshing(false);
