@@ -23,21 +23,21 @@ import java.util.ArrayList;
 import fr.insalyon.pi.tabmaster.R;
 import fr.insalyon.pi.tabmaster.adapters.TabAdapter;
 import fr.insalyon.pi.tabmaster.models.Music;
+import fr.insalyon.pi.tabmaster.models.MusicAppli;
 
 /**
  * Created by Ugo on 31/05/2016.
  */
-
-//TODO adapter à Music model
 public class TabLibraryFragment extends android.support.v4.app.Fragment {
 
-    private ArrayList<Music> tabs =new ArrayList<Music>();
+    private ArrayList<MusicAppli> tabs=new ArrayList<MusicAppli>();
     private TextView title;
     private Context ctx;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     public static TabLibraryFragment newInstance() {
         TabLibraryFragment newFragment = new TabLibraryFragment();
@@ -51,15 +51,16 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //Test object list
-        tabs = Music.createTabsList(1);
-        //new HttpUpdateTabLib().execute();
-        //tabs.add(new Music());
+        //tabs = Music.createTabsList(20);
+        //Log.d("TabLibraryFragment", "PASSED : tabs list created : " + tabs.get(12).getOwner());
+        //tabs.add(new MusicAppli(666,"Android"));
+
+        new HttpUpdateTabLib().execute();
 
         //Main view containing all the UI elements
         View view = inflater.inflate(R.layout.tab_library_fragment, container, false);
 
-        //Instancing UI elements
+        /*//Instancing UI elements
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         mSwipeRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
@@ -73,7 +74,9 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
                         mSwipeRefreshLayout.setRefreshing(false); //to use ine updateOperation
                     }
                 }
-        );
+        );*/
+        //Instancing UI elements
+        title = (TextView)view.findViewById(R.id.tab_lib_title);
 
         //Instancing recycler view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.tab_lib_recycle_view);
@@ -84,16 +87,14 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
         mLayoutManager = new LinearLayoutManager(ctx);
         mRecyclerView.setLayoutManager(mLayoutManager);
         Log.d("TabLibraryFragment", "PASSED : LayoutManager set");
-        // specify an adapter
+        // specify an adapter (see also next example)
         mAdapter = new TabAdapter(tabs);
-        System.out.print(tabs);
         mRecyclerView.setAdapter(mAdapter);
         Log.d("TabLibraryFragment", "PASSED : TabAdapter set");
-
         mRecyclerView.addItemDecoration(new Divider(ctx));
         return view;
-    }
 
+    }
     private class HttpUpdateTabLib extends AsyncTask<Void, Void, Music[]> {
         @Override
         protected Music[] doInBackground(Void... params) {
@@ -116,14 +117,15 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
                 for (Music elem : music) {
                     System.out.println("Music:"+String.valueOf(elem.getId()));
                     System.out.println("Music:"+elem.getTitle());
-                    //tabs.add(elem);
+                    tabs.add(new MusicAppli(elem.getId(),elem.getOwner(), elem.getCreated(), elem.getTitle(), elem.getNum_stars(), elem.getNum_stars_votes(), elem.getTablature()));
+                    mAdapter = new TabAdapter(tabs);
+                    mRecyclerView.setAdapter(mAdapter);
                 }
             }
-            mSwipeRefreshLayout.setRefreshing(false);
+            //mSwipeRefreshLayout.setRefreshing(false);
 
         }
     }
-
     //Define item decoration : line divider
     public class Divider extends RecyclerView.ItemDecoration {
         private Drawable mDivider;
@@ -151,5 +153,4 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
             }
         }
     }
-
 }

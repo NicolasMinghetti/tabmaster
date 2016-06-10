@@ -11,7 +11,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.insalyon.pi.tabmaster.R;
-import fr.insalyon.pi.tabmaster.models.Music;
+import fr.insalyon.pi.tabmaster.models.MusicAppli;
+
 /**
  * Created by Ugo on 31/05/2016.
  */
@@ -22,7 +23,7 @@ import fr.insalyon.pi.tabmaster.models.Music;
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
     // Store a member variable for the tabs
-    private List<Music> mTabs;
+    private List<MusicAppli> mTabs;
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -55,7 +56,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
     }
 
     // Pass in the tab array into the constructor
-    public TabAdapter(List<Music> tabs) {
+    public TabAdapter(List<MusicAppli> tabs) {
         mTabs = tabs;
     }
 
@@ -77,7 +78,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(TabAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        Music tab = mTabs.get(position);
+        MusicAppli tab = mTabs.get(position);
 
         // Set item views based on the data model
         TextView title = viewHolder.titleTV;

@@ -69,8 +69,8 @@ public class RestFragment extends android.support.v4.app.Fragment {
             for(Music elem : music) {
                 TextView greetingIdText = (TextView) view.findViewById(R.id.id_value);
                 TextView greetingContentText = (TextView) view.findViewById(R.id.content_value);
-                greetingIdText.setText(String.valueOf(elem.getId()));
-                greetingContentText.setText(elem.getTitle());
+                //greetingIdText.setText(String.valueOf(elem.getId()));
+                //greetingContentText.setText(elem.getTitle());
             }
         }
     }

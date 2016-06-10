@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by nicolas on 02/06/16.
  */
-public class Music {
+public class MusicAppli {
 
     //TODO Fusionner avec
     //TODO Associer audio file et tab
@@ -51,5 +51,15 @@ public class Music {
                 "id='" + id + '\'' +
                 ", owner=" + owner +
                 '}';
+    }
+
+    public MusicAppli (int id, String owner, Date created, String title, DecimalFormat num_stars, int num_stars_votes, String tablature){
+        this.id =id;
+        this.owner=owner;
+        this.created=created;
+        this.title=title;
+        this.num_stars=num_stars;
+        this.num_stars_votes=num_stars_votes;
+        this.tablature=tablature;
     }
 }
