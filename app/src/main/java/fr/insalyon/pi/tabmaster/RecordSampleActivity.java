@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -88,7 +89,7 @@ public class RecordSampleActivity extends AppCompatActivity {
     }
 
 
-
+    //Thread managing audio recording
     class AudioIn extends Thread {
         private boolean stopped = false;
         Context act;
@@ -105,7 +106,7 @@ public class RecordSampleActivity extends AppCompatActivity {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
 
             AudioRecord recorder;
-            short[] buffer = new short[44100];
+            short[] buffer = new short[44100]; //buufer containing the 44100 samples
 
             try { // ... initialise
 
@@ -137,12 +138,16 @@ public class RecordSampleActivity extends AppCompatActivity {
             }
         }
 
+        //*
         private void process(short[] buffer) {
+            //*
             String dataToSend = "";
             dataToSend = Arrays.toString(buffer);
             dataToSend = dataToSend.replaceAll(" ", "").replace("[", "").replace("]", "");
-            Log.i("AudioIn", Arrays.toString(buffer));
+            //*/
+            new HttpTabManager(dataToSend).execute();
 
+            /*
             try{
                 //set connection
                 URL urlObj = new URL(url);
@@ -152,6 +157,8 @@ public class RecordSampleActivity extends AppCompatActivity {
 
                 // Send post request
                 byte[] outputInBytes = dataToSend.getBytes("UTF-8");
+                System.out.println("Sending.............................................");
+
                 OutputStream os = urlCon.getOutputStream();
                 os.write( outputInBytes );
                 os.close();
@@ -173,7 +180,58 @@ public class RecordSampleActivity extends AppCompatActivity {
             }catch(Exception e){
                 Log.e("AudioIn", "Error : ", e);
             }
+            //*/
+        }
 
+
+        private class HttpTabManager extends AsyncTask<Void, Void, Void>{
+
+            String dataToSend;
+
+            public HttpTabManager(String dataToSend){
+                this.dataToSend = dataToSend;
+            }
+
+            @Override
+            protected Void doInBackground(Void... params){
+                Log.i("AudioIn", dataToSend);
+                try{
+
+                    //set connection
+                    URL urlObj = new URL(url);
+                    HttpURLConnection urlCon = (HttpURLConnection) urlObj.openConnection();
+                    //add request header
+                    urlCon.setRequestMethod("POST");
+
+                    // Send post request
+                    byte[] outputInBytes = dataToSend.getBytes("UTF-8");
+                    System.out.println("Sending.............................................");
+
+                    OutputStream os = urlCon.getOutputStream();
+                    os.write( outputInBytes );
+                    os.close();
+
+                    int responseCode = urlCon.getResponseCode();
+                    System.out.println("Response Code : " + responseCode);
+
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader(urlCon.getInputStream()));
+                    String inputLine;
+                    StringBuffer response = new StringBuffer();
+
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+
+                    //print result
+                }catch(Exception e){
+                    Log.e("AudioIn", "Error : ", e);
+                }finally {
+                    return null;
+                }
+
+            }
 
         }
 
@@ -182,4 +240,5 @@ public class RecordSampleActivity extends AppCompatActivity {
         }
 
     }
+
 }
