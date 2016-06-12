@@ -26,7 +26,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include(urls)),
     url(r'^admin/', admin.site.urls),
-    url(r'^facebook/', commentsViews.index, name='index'),
+    url(r'^facebook/', include('tabmaster.comments.urls')),
     url(r'^homepage/', homepageViews.index, name='index')
 ]
 

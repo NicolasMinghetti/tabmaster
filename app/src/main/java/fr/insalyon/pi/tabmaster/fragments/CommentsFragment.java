@@ -3,6 +3,7 @@ package fr.insalyon.pi.tabmaster.fragments;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class CommentsFragment extends android.support.v4.app.Fragment {
         //Main view containing all the UI elements
         view = inflater.inflate(R.layout.connect_fragment, container, false);
         //Instancing UI elements
-
+        String idMusic=getArguments().getString("idMusic");
 
         mWebView = (WebView) view.findViewById(R.id.activity_main_webview);
 
@@ -41,7 +42,8 @@ public class CommentsFragment extends android.support.v4.app.Fragment {
             CookieManager.getInstance().setAcceptThirdPartyCookies(mWebView, true);
 
         }
-        mWebView.loadUrl(getResources().getString(R.string.serveur_ip)+"/facebook/");
+        mWebView.loadUrl(getResources().getString(R.string.serveur_ip)+"/facebook/"+idMusic);
+        Log.i("Comments Fragment", "url requested: "+getResources().getString(R.string.serveur_ip)+"/facebook/"+idMusic);
         return view;
     }
 

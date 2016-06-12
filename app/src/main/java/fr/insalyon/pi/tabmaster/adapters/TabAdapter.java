@@ -2,6 +2,8 @@ package fr.insalyon.pi.tabmaster.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,8 +14,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import fr.insalyon.pi.tabmaster.MainActivity;
 import fr.insalyon.pi.tabmaster.R;
 import fr.insalyon.pi.tabmaster.Scrolling;
+import fr.insalyon.pi.tabmaster.fragments.CommentsFragment;
 import fr.insalyon.pi.tabmaster.models.MusicAppli;
 
 /**
@@ -38,6 +42,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         private TextView authorTV;
         private ImageButton openBtn;
         private ImageButton playBtn;
+        private ImageButton commentsBtn;
 
         public ViewHolder(View itemView) {
 
@@ -62,6 +67,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
             authorTV = (TextView) itemView.findViewById(R.id.authorTV);
             openBtn = (ImageButton) itemView.findViewById(R.id.openButton);
             playBtn = (ImageButton) itemView.findViewById(R.id.playButton);
+            commentsBtn = (ImageButton) itemView.findViewById(R.id.commentsButton);
         }
     }
 
@@ -97,9 +103,6 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         TextView author = viewHolder.authorTV;
         author.setText(tab.getOwner());
 
-        ImageButton openButton = viewHolder.openBtn;
-        ImageButton playButton = viewHolder.playBtn;
-
         final String tablature=tab.getTablature();
         viewHolder.playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,11 +115,37 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
             }
         });
+
+        final int idMusic=tab.getId();
+        viewHolder.commentsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentJump(idMusic);
+            }
+        });
+
     }
 
     // Return the total count of items
     @Override
     public int getItemCount() {
         return mTabs.size();
+    }
+    private void fragmentJump(int idMusic) {
+        Fragment mFragment = new CommentsFragment();
+        Bundle mBundle = new Bundle();
+        mBundle.putString("idMusic", String.valueOf(idMusic));
+        //mBundle.putParcelable("item_selected_key", mItemSelected);
+        mFragment.setArguments(mBundle);
+        switchContent(R.id.tab_lib_recycle_view, mFragment);
+    }
+    public void switchContent(int id, Fragment fragment) {
+        if (context== null)
+            return;
+        if (context instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) context;
+            Fragment frag = fragment;
+            mainActivity.switchContent(id, frag);
+        }
     }
 }

@@ -6,4 +6,12 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/grey</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+    <style name="Button">
+
+        <item name="android:colorButtonNormal">#3F51B5</item>
+    </style>
 </resources>

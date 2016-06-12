@@ -202,4 +202,13 @@ public class MainActivity extends AppCompatActivity
             connection_state.setText(R.string.welcom);
         }
     }
+    public void switchContent(int id, Fragment fragment) {
+        //FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, fragment).commit();
+
+        /*ft.replace(id, fragment, fragment.toString());
+        ft.addToBackStack(null);
+        ft.commit();*/
+    }
 }
