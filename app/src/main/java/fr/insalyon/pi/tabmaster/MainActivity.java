@@ -23,10 +23,8 @@ import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 
-import fr.insalyon.pi.tabmaster.fragments.CommentsFragment;
 import fr.insalyon.pi.tabmaster.fragments.FacebookConnectFragment;
 import fr.insalyon.pi.tabmaster.fragments.RecordFragment;
-import fr.insalyon.pi.tabmaster.fragments.RestFragment;
 import fr.insalyon.pi.tabmaster.fragments.TabLibraryFragment;
 
 
@@ -115,19 +113,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(secondeActivite);*/
             try {
                 fragment = new FacebookConnectFragment().newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (id == R.id.nav_tempory_rest) {
-            try {
-                fragment = new RestFragment().newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (id == R.id.nav_tempory_comments) {
-
-            try {
-                fragment = new CommentsFragment().newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
