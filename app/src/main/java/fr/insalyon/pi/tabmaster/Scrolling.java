@@ -43,18 +43,18 @@ public class Scrolling extends Activity {
         setContentView(R.layout.scrolling_activity2);
 
 
-        String newString;
+        String tablature;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
-                newString= null;
+                tablature= null;
             } else {
-                newString= extras.getString("MusicTablature");
+                tablature= extras.getString("MusicTablature");
             }
         } else {
-            newString= (String) savedInstanceState.getSerializable("MusicTablature");
+            tablature= (String) savedInstanceState.getSerializable("MusicTablature");
         }
-        System.out.println(newString);
+        System.out.println(tablature);
 
         // For verticalSrollview, from : https://github.com/blessenm/AndroidAutoScrollListView
         horizontalScrollview  =   (HorizontalScrollView) findViewById(R.id.horizontal_scrollview_id2);
@@ -119,8 +119,8 @@ public class Scrolling extends Activity {
         // Puis on récupère le nom de la musique donné dans l'autre activité, ou 0 si cet extra n'est pas dans l'intent
         int age = i.getIntExtra(ScrollFragment.AGE, 0);
 
-
-        String string="444---/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-";
+        String string = tablature;
+        //String string="444---/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-/------/------/--0---/------/--2---/-1--6-/-1--6-/--0---/------/--2---/------/------/--0---/------/--2---/-1--6-/-1--6-";
         String[] parts = string.split("/");
 
         LinearLayout parent = (LinearLayout) findViewById(R.id.ll_example);

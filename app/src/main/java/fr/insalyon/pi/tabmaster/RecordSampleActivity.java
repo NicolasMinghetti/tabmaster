@@ -92,7 +92,7 @@ public class RecordSampleActivity extends AppCompatActivity {
     class AudioIn extends Thread {
         private boolean stopped = false;
         Context act;
-        final String url = "http://10.43.2.151:80/recup";
+        final String url = getResources().getString(R.string.serveur_ip)+"/recup";
 
 
         AudioIn(AppCompatActivity parent) {

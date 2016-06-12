@@ -41,7 +41,7 @@ public class CommentsFragment extends android.support.v4.app.Fragment {
             CookieManager.getInstance().setAcceptThirdPartyCookies(mWebView, true);
 
         }
-        mWebView.loadUrl("http://10.0.2.2:8000/facebook/");
+        mWebView.loadUrl(getResources().getString(R.string.serveur_ip)+"/facebook/");
         return view;
     }
 

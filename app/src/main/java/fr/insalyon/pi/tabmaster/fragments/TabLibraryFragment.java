@@ -99,7 +99,7 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
         @Override
         protected Music[] doInBackground(Void... params) {
             try {
-                final String url = "http://10.0.2.2:8000/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
+                final String url = getResources().getString(R.string.serveur_ip)+"/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Music[] tabslocal = restTemplate.getForObject(url, Music[].class);

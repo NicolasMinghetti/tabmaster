@@ -27,7 +27,6 @@ import fr.insalyon.pi.tabmaster.fragments.CommentsFragment;
 import fr.insalyon.pi.tabmaster.fragments.FacebookConnectFragment;
 import fr.insalyon.pi.tabmaster.fragments.RecordFragment;
 import fr.insalyon.pi.tabmaster.fragments.RestFragment;
-import fr.insalyon.pi.tabmaster.fragments.ScrollFragment;
 import fr.insalyon.pi.tabmaster.fragments.TabLibraryFragment;
 
 
@@ -107,15 +106,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_record) {
             try {
                 fragment = new RecordFragment().newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (id == R.id.nav_tempory_scrolling) {
-            // A faire NICO
-
-            // Tempory page to access Scrolling Activity.
-            try {
-                fragment = new ScrollFragment().newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
