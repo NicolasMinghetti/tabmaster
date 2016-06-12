@@ -7,7 +7,7 @@ class Music(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
     owner = models.CharField(max_length=100)
-    num_stars = models.DecimalField(blank=True, default='', max_digits=7, decimal_places=5)
+    num_stars = models.FloatField(blank=True, default='')
     num_stars_votes = models.IntegerField(blank=True, default='')
 
     tablature = models.TextField()

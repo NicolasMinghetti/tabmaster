@@ -2,6 +2,7 @@ package fr.insalyon.pi.tabmaster.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,11 +11,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.List;
 
 import fr.insalyon.pi.tabmaster.FacebookComments;
 import fr.insalyon.pi.tabmaster.R;
 import fr.insalyon.pi.tabmaster.Scrolling;
+import fr.insalyon.pi.tabmaster.models.Music;
 import fr.insalyon.pi.tabmaster.models.MusicAppli;
 
 /**
@@ -27,8 +32,9 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
     // Store a member variable for the tabs
     private List<MusicAppli> mTabs;
+    public int positionG;
+    public int newStar;
     private static Context context;
-
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -39,6 +45,11 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         private ImageButton openBtn;
         private ImageButton playBtn;
         private ImageButton commentsBtn;
+        private ImageButton star1;
+        private ImageButton star2;
+        private ImageButton star3;
+        private ImageButton star4;
+        private ImageButton star5;
 
         public ViewHolder(View itemView) {
 
@@ -64,6 +75,11 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
             openBtn = (ImageButton) itemView.findViewById(R.id.openButton);
             playBtn = (ImageButton) itemView.findViewById(R.id.playButton);
             commentsBtn = (ImageButton) itemView.findViewById(R.id.commentsButton);
+            star1 = (ImageButton) itemView.findViewById(R.id.star1);
+            star2 = (ImageButton) itemView.findViewById(R.id.star2);
+            star3 = (ImageButton) itemView.findViewById(R.id.star3);
+            star4 = (ImageButton) itemView.findViewById(R.id.star4);
+            star5 = (ImageButton) itemView.findViewById(R.id.star5);
         }
     }
 
@@ -88,7 +104,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(TabAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(TabAdapter.ViewHolder viewHolder, final int position) {
         // Get the data model based on position
         MusicAppli tab = mTabs.get(position);
 
@@ -125,6 +141,86 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
             }
         });
 
+        Float numStars=tab.getNum_stars();
+        ImageButton star1 = viewHolder.star1;
+        ImageButton star2 = viewHolder.star2;
+        ImageButton star3 = viewHolder.star3;
+        ImageButton star4 = viewHolder.star4;
+        ImageButton star5 = viewHolder.star5;
+
+        if(0<=numStars && numStars<1){
+            star1.setImageResource(R.drawable.ic_grade_black_36dp);
+            star2.setImageResource(R.drawable.ic_grade_white_36dp);
+            star3.setImageResource(R.drawable.ic_grade_white_36dp);
+            star4.setImageResource(R.drawable.ic_grade_grey_36dp);
+            star5.setImageResource(R.drawable.ic_grade_grey_36dp);
+        } else if (1<=numStars && numStars<2) {
+            star1.setImageResource(R.drawable.ic_grade_black_36dp);
+            star2.setImageResource(R.drawable.ic_grade_black_36dp);
+            star3.setImageResource(R.drawable.ic_grade_grey_36dp);
+            star4.setImageResource(R.drawable.ic_grade_grey_36dp);
+            star5.setImageResource(R.drawable.ic_grade_grey_36dp);
+        } else if (2<=numStars && numStars<3) {
+            star1.setImageResource(R.drawable.ic_grade_black_36dp);
+            star2.setImageResource(R.drawable.ic_grade_black_36dp);
+            star3.setImageResource(R.drawable.ic_grade_black_36dp);
+            star4.setImageResource(R.drawable.ic_grade_grey_36dp);
+            star5.setImageResource(R.drawable.ic_grade_grey_36dp);
+        } else if (3<=numStars && numStars<4) {
+            star1.setImageResource(R.drawable.ic_grade_black_36dp);
+            star2.setImageResource(R.drawable.ic_grade_black_36dp);
+            star3.setImageResource(R.drawable.ic_grade_black_36dp);
+            star4.setImageResource(R.drawable.ic_grade_black_36dp);
+            star5.setImageResource(R.drawable.ic_grade_grey_36dp);
+        } else {
+            star1.setImageResource(R.drawable.ic_grade_black_36dp);
+            star2.setImageResource(R.drawable.ic_grade_black_36dp);
+            star3.setImageResource(R.drawable.ic_grade_black_36dp);
+            star4.setImageResource(R.drawable.ic_grade_black_36dp);
+            star5.setImageResource(R.drawable.ic_grade_black_36dp);
+        }
+        viewHolder.star1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                positionG=position;
+                newStar=1;
+                new HttpRequestTaskSendUpdate().execute();
+            }
+        });
+        viewHolder.star2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                positionG=position;
+                newStar=2;
+                new HttpRequestTaskSendUpdate().execute();
+            }
+        });
+        viewHolder.star3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                positionG=position;
+                newStar=3;
+                new HttpRequestTaskSendUpdate().execute();
+            }
+        });
+        viewHolder.star4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                positionG=position;
+                newStar=4;
+                new HttpRequestTaskSendUpdate().execute();
+            }
+        });
+        viewHolder.star5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                positionG=position;
+                newStar=5;
+                new HttpRequestTaskSendUpdate().execute();
+            }
+        });
+
+
     }
 
     // Return the total count of items
@@ -149,4 +245,33 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
             mainActivity.switchContent(id, frag);
         }
     }*/
+    private class HttpRequestTaskSendUpdate extends AsyncTask<Void, Void, Music[]> {
+        @Override
+        protected Music[] doInBackground(Void... params) {
+            try {
+                //final String url = context.getResources().getString(R.string.serveur_ip)+"/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
+                MusicAppli tab = mTabs.get(positionG);
+                final String url = "http://10.0.2.2:8000/music/"+tab.getId()+"/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
+
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+                //restTemplate.put(url,mTabs);
+                //Music[] music = restTemplate.getForObject(url, Music[].class);
+                Music nouvelleMusic = new Music();
+                nouvelleMusic.setTitle(tab.getTitle());
+                nouvelleMusic.setOwner(tab.getOwner());
+                nouvelleMusic.setNum_stars(new Float(newStar));
+                nouvelleMusic.setNum_stars_votes(tab.getNum_stars_votes());
+                nouvelleMusic.setTablature(tab.getTablature());
+                restTemplate.put( url, nouvelleMusic, Music.class);
+
+
+                //return music;
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+            return null;
+        }
+    }
 }

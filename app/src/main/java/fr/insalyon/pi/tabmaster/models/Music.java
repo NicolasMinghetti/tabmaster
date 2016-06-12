@@ -1,6 +1,5 @@
 package fr.insalyon.pi.tabmaster.models;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
@@ -15,7 +14,7 @@ public class Music {
     private String owner;
     private Date created;
     private String title;
-    private DecimalFormat num_stars;
+    private Float num_stars;
     private int num_stars_votes;
     private String tablature;
 
@@ -33,7 +32,7 @@ public class Music {
         return this.owner;
     }
 
-    public DecimalFormat getNum_stars() {
+    public Float getNum_stars() {
         return this.num_stars;
     }
 
@@ -52,4 +51,18 @@ public class Music {
                 ", owner=" + owner +
                 '}';
     }
+
+    public void setId(int id) { this.id=id; }
+
+    public void setCreated(Date created) { this.created=created; }
+
+    public void setTitle(String title) { this.title=title; }
+
+    public void setOwner(String owner) { this.owner=owner; }
+
+    public void setNum_stars(Float num_stars) { this.num_stars=num_stars; }
+
+    public void setNum_stars_votes(int num_stars_votes) { this.num_stars_votes=num_stars_votes; }
+
+    public void setTablature(String tablature) { this.tablature=tablature; }
 }

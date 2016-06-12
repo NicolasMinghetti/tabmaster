@@ -9,6 +9,7 @@
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
         android:gravity="start"
         android:layout_weight="1">
 
@@ -27,12 +28,48 @@
             android:text="Small Text"
             android:id="@+id/authorTV"
             android:layout_gravity="left" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/light"
+                android:id="@+id/star1"
+                android:src="@drawable/ic_grade_black_36dp"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/light"
+                android:id="@+id/star2"
+                android:src="@drawable/ic_grade_black_36dp"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/light"
+                android:id="@+id/star3"
+                android:src="@drawable/ic_grade_black_36dp"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/light"
+                android:id="@+id/star4"
+                android:src="@drawable/ic_grade_black_36dp"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/light"
+                android:id="@+id/star5"
+                android:src="@drawable/ic_grade_black_36dp"/>
+
+        </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="right">
+        android:orientation="horizontal">
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -40,38 +77,31 @@
             android:theme="@style/Button"
             android:id="@+id/playButton"
             android:src="@drawable/ic_play_arrow_white_36dp"
+            android:layout_centerVertical="true"
+
             android:layout_gravity="right"
             android:contentDescription="@string/play_button" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="right">
-
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:theme="@style/Button"
             android:id="@+id/openButton"
             android:src="@drawable/ic_music_note_white_36dp"
+            android:layout_toEndOf="@id/playButton"
+            android:layout_centerVertical="true"
             android:contentDescription="@string/open_tab"
             android:layout_gravity="right" />
-    </FrameLayout>
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="right">
-
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:theme="@style/Button"
             android:id="@+id/commentsButton"
+            android:layout_toEndOf="@id/openButton"
+            android:layout_centerVertical="true"
             android:src="@drawable/ic_comment_white_36dp"
             android:contentDescription="@string/open_comments"
             android:layout_gravity="right" />
-    </FrameLayout>
+    </RelativeLayout>
 
 </LinearLayout>
 
