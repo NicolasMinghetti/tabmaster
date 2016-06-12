@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import fr.insalyon.pi.tabmaster.FacebookComments;
 import fr.insalyon.pi.tabmaster.MainActivity;
 import fr.insalyon.pi.tabmaster.R;
 import fr.insalyon.pi.tabmaster.Scrolling;
@@ -120,7 +121,12 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         viewHolder.commentsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentJump(idMusic);
+                //fragmentJump(idMusic);
+                final Intent intent;
+                intent =  new Intent(context, FacebookComments.class);
+                intent.putExtra("idMusic", String.valueOf(idMusic));
+
+                context.startActivity(intent);
             }
         });
 

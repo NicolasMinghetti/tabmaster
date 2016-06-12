@@ -22,4 +22,7 @@
     <string name="smallTitle"><i>L\'applications des musicens en herbe</i></string>
     <string name="welcom">Pour commencer merci de vous connecter en cliquant sur Facebook dans le menu de gauche</string>
     <string name="open_comments">Open comments</string>
+    <string name="title_facebook_comments">Commentaires</string>
+
+
 </resources>
