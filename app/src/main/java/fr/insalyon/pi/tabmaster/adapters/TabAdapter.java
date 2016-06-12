@@ -2,8 +2,6 @@ package fr.insalyon.pi.tabmaster.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,10 +12,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import fr.insalyon.pi.tabmaster.MainActivity;
+import fr.insalyon.pi.tabmaster.FacebookComments;
 import fr.insalyon.pi.tabmaster.R;
 import fr.insalyon.pi.tabmaster.Scrolling;
-import fr.insalyon.pi.tabmaster.fragments.CommentsFragment;
 import fr.insalyon.pi.tabmaster.models.MusicAppli;
 
 /**
@@ -119,7 +116,12 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         viewHolder.commentsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentJump(idMusic);
+                //fragmentJump(idMusic);
+                final Intent intent;
+                intent =  new Intent(context, FacebookComments.class);
+                intent.putExtra("idMusic", String.valueOf(idMusic));
+
+                context.startActivity(intent);
             }
         });
 
@@ -130,15 +132,15 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
     public int getItemCount() {
         return mTabs.size();
     }
-    private void fragmentJump(int idMusic) {
+    /*private void fragmentJump(int idMusic) {
         Fragment mFragment = new CommentsFragment();
         Bundle mBundle = new Bundle();
         mBundle.putString("idMusic", String.valueOf(idMusic));
         //mBundle.putParcelable("item_selected_key", mItemSelected);
         mFragment.setArguments(mBundle);
         switchContent(R.id.tab_lib_recycle_view, mFragment);
-    }
-    public void switchContent(int id, Fragment fragment) {
+    }*/
+    /*public void switchContent(int id, Fragment fragment) {
         if (context== null)
             return;
         if (context instanceof MainActivity) {
@@ -146,5 +148,5 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
             Fragment frag = fragment;
             mainActivity.switchContent(id, frag);
         }
-    }
+    }*/
 }

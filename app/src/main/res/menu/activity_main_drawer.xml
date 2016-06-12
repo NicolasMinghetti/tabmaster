@@ -18,14 +18,6 @@
             android:id="@+id/nav_record"
             android:icon="@drawable/ic_fiber_manual_record_black_24dp"
             android:title="Record a new music" />
-        <item
-            android:id="@+id/nav_tempory_rest"
-            android:icon="@drawable/ic_fast_forward_black_24dp"
-            android:title="Tempory Rest Activity" />
-        <item
-            android:id="@+id/nav_tempory_comments"
-            android:icon="@drawable/ic_fast_forward_black_24dp"
-            android:title="Tempory Comment Activity" />
 
     </group>
 
