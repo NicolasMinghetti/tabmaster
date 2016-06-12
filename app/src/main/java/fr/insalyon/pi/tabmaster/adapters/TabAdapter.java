@@ -25,7 +25,6 @@ import fr.insalyon.pi.tabmaster.models.MusicAppli;
  * Created by Ugo on 31/05/2016.
  */
 
-//TODO adapter à Music model
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
 public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {

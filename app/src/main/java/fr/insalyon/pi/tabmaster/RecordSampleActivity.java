@@ -141,7 +141,7 @@ public class RecordSampleActivity extends AppCompatActivity {
             String dataToSend = "";
             dataToSend = Arrays.toString(buffer);
             dataToSend = dataToSend.replaceAll(" ", "").replace("[", "").replace("]", "");
-            System.out.println(Arrays.toString(buffer));
+            Log.i("AudioIn", Arrays.toString(buffer));
 
             try{
                 //set connection
@@ -170,8 +170,8 @@ public class RecordSampleActivity extends AppCompatActivity {
                 in.close();
 
                 //print result
-                System.out.println(response.toString());
             }catch(Exception e){
+                Log.e("AudioIn", "Error : ", e);
             }
 
 

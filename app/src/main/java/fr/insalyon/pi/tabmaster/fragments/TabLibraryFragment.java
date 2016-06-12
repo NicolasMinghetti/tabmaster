@@ -76,7 +76,6 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
                 }
         );*/
         //Instancing UI elements
-        title = (TextView)view.findViewById(R.id.tab_lib_title);
 
         //Instancing recycler view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.tab_lib_recycle_view);
