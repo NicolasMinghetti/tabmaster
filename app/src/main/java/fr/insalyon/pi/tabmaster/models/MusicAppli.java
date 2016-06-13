@@ -7,9 +7,6 @@ import java.util.Date;
  */
 public class MusicAppli {
 
-    //TODO Fusionner avec
-    //TODO Associer audio file et tab
-
     private int id;
     private String owner;
     private Date created;

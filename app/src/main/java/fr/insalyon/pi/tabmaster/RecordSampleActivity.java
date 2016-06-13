@@ -6,6 +6,7 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -20,15 +21,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 
+import fr.insalyon.pi.tabmaster.fragments.NewTabDialogFragment;
+
 /* Created by Ugo on 06/06/2016.
  */
 
-//TODO NETTOYER CE FOUTRE
-//TODO Intégrer en tant que fragment
-//TODO Récupérer la tab renvoyée par le serveur
-//TODO Fenêtre enregistrer la tablature avec Titre etc.
 public class RecordSampleActivity extends AppCompatActivity {
     private AudioIn ai;
+    private StringBuffer finalTab;
+    private FragmentManager fragmentManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,9 @@ public class RecordSampleActivity extends AppCompatActivity {
 
         setButtonHandlers();
         enableButtons(false);
+
+        finalTab = new StringBuffer();
+        fragmentManager = getSupportFragmentManager();
     }
 
     private void setButtonHandlers() {
@@ -57,7 +61,9 @@ public class RecordSampleActivity extends AppCompatActivity {
         ai = new AudioIn(this);
     }
 
-    private void stopRecording() {ai.close();}
+    private void stopRecording() {
+        ai.close();
+    }
 
     private View.OnClickListener btnClick = new View.OnClickListener() {
         public void onClick(View v) {
@@ -87,7 +93,6 @@ public class RecordSampleActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
     //Thread managing audio recording
     class AudioIn extends Thread {
@@ -140,47 +145,10 @@ public class RecordSampleActivity extends AppCompatActivity {
 
         //*
         private void process(short[] buffer) {
-            //*
             String dataToSend = "";
             dataToSend = Arrays.toString(buffer);
             dataToSend = dataToSend.replaceAll(" ", "").replace("[", "").replace("]", "");
-            //*/
             new HttpTabManager(dataToSend).execute();
-
-            /*
-            try{
-                //set connection
-                URL urlObj = new URL(url);
-                HttpURLConnection urlCon = (HttpURLConnection) urlObj.openConnection();
-                //add request header
-                urlCon.setRequestMethod("POST");
-
-                // Send post request
-                byte[] outputInBytes = dataToSend.getBytes("UTF-8");
-                System.out.println("Sending.............................................");
-
-                OutputStream os = urlCon.getOutputStream();
-                os.write( outputInBytes );
-                os.close();
-
-                int responseCode = urlCon.getResponseCode();
-                System.out.println("Response Code : " + responseCode);
-
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(urlCon.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-
-                //print result
-            }catch(Exception e){
-                Log.e("AudioIn", "Error : ", e);
-            }
-            //*/
         }
 
 
@@ -205,11 +173,13 @@ public class RecordSampleActivity extends AppCompatActivity {
 
                     // Send post request
                     byte[] outputInBytes = dataToSend.getBytes("UTF-8");
-                    System.out.println("Sending.............................................");
+
+                    System.out.println("sending....................");
 
                     OutputStream os = urlCon.getOutputStream();
                     os.write( outputInBytes );
                     os.close();
+
 
                     int responseCode = urlCon.getResponseCode();
                     System.out.println("Response Code : " + responseCode);
@@ -222,7 +192,11 @@ public class RecordSampleActivity extends AppCompatActivity {
                     while ((inputLine = in.readLine()) != null) {
                         response.append(inputLine);
                     }
+                    System.out.println("Response is :" +response);
                     in.close();
+
+                    //buffering response
+                    finalTab.append(response);
 
                     //print result
                 }catch(Exception e){
@@ -230,7 +204,14 @@ public class RecordSampleActivity extends AppCompatActivity {
                 }finally {
                     return null;
                 }
+            }
 
+            @Override
+            protected void onPostExecute(Void i){
+                if(stopped) { //if last frame
+                    NewTabDialogFragment ntd = NewTabDialogFragment.newInstance(finalTab.toString()); //cast the received tab into a string
+                    ntd.show(fragmentManager, "tabdialog"); //start the create new tab dialog passing it the tab
+                }
             }
 
         }
