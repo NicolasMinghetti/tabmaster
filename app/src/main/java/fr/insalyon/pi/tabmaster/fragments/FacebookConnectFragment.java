@@ -26,9 +26,12 @@ public class FacebookConnectFragment extends android.support.v4.app.Fragment {
     Button btn;
     Context ctx;
 
-    public static FacebookConnectFragment newInstance() {
+    /*public static FacebookConnectFragment newInstance() {
         FacebookConnectFragment newFragment = new FacebookConnectFragment();
         return newFragment;
+    }*/
+    public FacebookConnectFragment() {
+        // Empty constructor required for fragment subclasses
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
