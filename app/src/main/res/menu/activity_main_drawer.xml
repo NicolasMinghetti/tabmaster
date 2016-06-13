@@ -2,32 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:title="Page d'accueil">
-        <menu>
         <item
             android:id="@+id/home"
             android:icon="@drawable/ic_home_black_48dp"
-            android:title="Page d'accueil" />
-        </menu>
-        </item>
+            android:title="@string/homepage" />
+    </group>
+    <item android:title="@string/music">
+        <menu>
+            <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_library"
             android:icon="@drawable/ic_library_music_black_24dp"
-            android:title="Music Library" />
+            android:title="@string/music_library" />
         <item
             android:id="@+id/nav_record"
             android:icon="@drawable/ic_fiber_manual_record_black_24dp"
-            android:title="Record a new music" />
-
-    </group>
-
-    <item android:title="Réglages">
-        <menu>
-            <item
-                android:id="@+id/nav_facebook_connection"
-                android:icon="@drawable/ic_lock_open_black_24dp"
-                android:title="Connect with Facebook" />
+            android:title="@string/record_a_new_music" />
+            </group>
         </menu>
     </item>
-
+    <item android:title="@string/reglages">
+        <menu>
+            <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_facebook_connection"
+            android:icon="@drawable/ic_lock_open_black_24dp"
+            android:title="@string/connect_with_facebook" />
+            </group>
+        </menu>
+    </item>
 </menu>

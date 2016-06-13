@@ -5,8 +5,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="facebook_app_id">955203431265082</string>
     <string name="action_settings">Settings</string>
-    <string name="title_defilement">Défilement</string>
-    <string name="title_facebook">Page de connexion facebook</string>
+    <string name="title_defilement">Scrolling</string>
+    <string name="title_facebook">Facebook connexion page</string>
     <string name="connection_state">Not Connected</string>
     <string name="id_label">The ID is</string>
     <string name="id_value">[id]</string>
@@ -22,7 +22,13 @@
     <string name="smallTitle"><i>L\'applications des musicens en herbe</i></string>
     <string name="welcom">Pour commencer merci de vous connecter en cliquant sur Facebook dans le menu de gauche</string>
     <string name="open_comments">Open comments</string>
-    <string name="title_facebook_comments">Commentaires</string>
+    <string name="title_facebook_comments">Comments</string>
+    <string name="music_library">Music Library</string>
+    <string name="record_a_new_music">Record a new music</string>
+    <string name="connect_with_facebook">Connect with Facebook</string>
+    <string name="music">Music</string>
+    <string name="reglages">Settings</string>
+    <string name="homepage">Homepage</string>
 
 
 </resources>

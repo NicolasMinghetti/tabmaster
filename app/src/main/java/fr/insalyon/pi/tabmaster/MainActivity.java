@@ -1,7 +1,6 @@
 package fr.insalyon.pi.tabmaster;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,22 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
 
 import fr.insalyon.pi.tabmaster.fragments.FacebookConnectFragment;
+import fr.insalyon.pi.tabmaster.fragments.HomeFragment;
 import fr.insalyon.pi.tabmaster.fragments.RecordFragment;
 import fr.insalyon.pi.tabmaster.fragments.TabLibraryFragment;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     Context ctx;
     @Override
@@ -48,8 +42,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        connection();
-
+        // Insert the fragment by replacing any existing fragment
+        Fragment fragment=new HomeFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_main_frame, fragment).commit();
     }
 
     @Override
@@ -87,7 +83,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-
+        Log.i("menuItem", menuItem.toString());
         Fragment fragment = null;
         // Handle navigation view item clicks here.
         int id = menuItem.getItemId();
@@ -96,14 +92,14 @@ public class MainActivity extends AppCompatActivity
             // Go into user's library
             // A faire UGO
             try {
-                fragment = new TabLibraryFragment().newInstance();
+                fragment = new TabLibraryFragment();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         } else if (id == R.id.nav_record) {
             try {
-                fragment = new RecordFragment().newInstance();
+                fragment = new RecordFragment();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -112,50 +108,29 @@ public class MainActivity extends AppCompatActivity
             /*Intent secondeActivite = new Intent(ctx, FacebookConnect.class);
             startActivity(secondeActivite);*/
             try {
-                fragment = new FacebookConnectFragment().newInstance();
+                fragment = new FacebookConnectFragment();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if (id == R.id.home) {
-
             try {
-                setContentView(R.layout.activity_main);
-                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-                setSupportActionBar(toolbar);
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-                drawer.setDrawerListener(toggle);
-                toggle.syncState();
-
-                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                navigationView.setNavigationItemSelectedListener(this);
-                connection();
-                return true;
-
+                fragment = new HomeFragment();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        ImageView imageView = (ImageView) findViewById(R.id.profile);
-        imageView.setVisibility(View.INVISIBLE);
-        TextView title = (TextView) findViewById(R.id.tabmasterTitle);
-        title.setVisibility(View.INVISIBLE);
-        TextView smallTitle= (TextView) findViewById(R.id.smallTitle);
-        smallTitle.setVisibility(View.INVISIBLE);
-        TextView loginState = (TextView) findViewById(R.id.loginState);
-        loginState.setVisibility(View.INVISIBLE);
-        Button btn = (Button) findViewById(R.id.facebook_btn);
-        btn.setVisibility(View.INVISIBLE);
+        fragmentManager.beginTransaction().replace(R.id.content_main_frame, fragment).commit();
 
-        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
-
+        Log.i("item ID", String.valueOf(menuItem.getItemId()));
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
+
+        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(id);
+*/
         // Set action bar title
         setTitle(menuItem.getTitle());
 
@@ -164,33 +139,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent secondeActivite = new Intent(ctx, FacebookConnect.class);
-        startActivity(secondeActivite);
-    }
 
-    public void connection() {
-        ctx = getApplicationContext();
-        boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
-
-        TextView connection_state= (TextView)findViewById(R.id.loginState);
-        Button btn = (Button) findViewById(R.id.facebook_btn);
-        btn.setOnClickListener(this);
-        if(loggedIn){
-            btn.setVisibility(View.INVISIBLE);
-            Log.i("User connected, profile", Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
-            connection_state.setText("Bonjour "+Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
-        } else {
-            btn.setVisibility(View.VISIBLE);
-            Log.i("Connection State", String.valueOf(loggedIn));
-            connection_state.setText(R.string.welcom);
-        }
-    }
     public void switchContent(int id, Fragment fragment) {
         //FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, fragment).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.content_main_frame, fragment).commit();
 
         /*ft.replace(id, fragment, fragment.toString());
         ft.addToBackStack(null);
