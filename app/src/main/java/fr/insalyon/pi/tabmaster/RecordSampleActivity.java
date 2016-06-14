@@ -111,7 +111,7 @@ public class RecordSampleActivity extends AppCompatActivity {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
 
             AudioRecord recorder;
-            short[] buffer = new short[44100]; //buufer containing the 44100 samples
+            short[] buffer = new short[44100]; //buffer containing the 44100 samples
 
             try { // ... initialise
 

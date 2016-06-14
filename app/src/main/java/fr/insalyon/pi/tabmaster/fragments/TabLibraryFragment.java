@@ -36,7 +36,6 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     public static TabLibraryFragment newInstance() {
