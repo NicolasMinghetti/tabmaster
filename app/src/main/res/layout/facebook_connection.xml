@@ -39,6 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/returnButton"
+        android:theme="@style/Button"
+        android:textColor="@color/light"
         android:layout_gravity="center"
         android:text="Retourner sur la page d'accueil" />
 </LinearLayout>
