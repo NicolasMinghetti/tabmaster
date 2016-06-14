@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -185,6 +186,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
                 positionG=position;
                 newStar=1;
                 new HttpRequestTaskSendUpdate().execute();
+                Toast.makeText(context, "Merci, votre vote a été pris en compte !", Toast.LENGTH_SHORT).show();
             }
         });
         viewHolder.star2.setOnClickListener(new View.OnClickListener() {
@@ -193,6 +195,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
                 positionG=position;
                 newStar=2;
                 new HttpRequestTaskSendUpdate().execute();
+                Toast.makeText(context, "Merci, votre vote a été pris en compte !", Toast.LENGTH_SHORT).show();
             }
         });
         viewHolder.star3.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +204,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
                 positionG=position;
                 newStar=3;
                 new HttpRequestTaskSendUpdate().execute();
+                Toast.makeText(context, "Merci, votre vote a été pris en compte !", Toast.LENGTH_SHORT).show();
             }
         });
         viewHolder.star4.setOnClickListener(new View.OnClickListener() {
@@ -209,6 +213,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
                 positionG=position;
                 newStar=4;
                 new HttpRequestTaskSendUpdate().execute();
+                Toast.makeText(context, "Merci, votre vote a été pris en compte !", Toast.LENGTH_SHORT).show();
             }
         });
         viewHolder.star5.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +222,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
                 positionG=position;
                 newStar=5;
                 new HttpRequestTaskSendUpdate().execute();
+                Toast.makeText(context, "Merci, votre vote a été pris en compte !", Toast.LENGTH_SHORT).show();
             }
         });
 
