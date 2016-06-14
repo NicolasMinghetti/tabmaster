@@ -71,10 +71,20 @@
 		android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 		android:layout_below="@id/topHeader"
-		android:text="@string/strongTitleDefault"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_marginStart="10dp"
         android:id="@+id/songTitle"
+		android:textStyle="bold"
+		tools:context=".MainActivity" />
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/topHeader"
+		android:layout_toEndOf="@id/songTitle"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_marginStart="10dp"
+		android:id="@+id/songOwner"
+		android:textStyle="italic"
 		tools:context=".MainActivity" />
     <HorizontalScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"

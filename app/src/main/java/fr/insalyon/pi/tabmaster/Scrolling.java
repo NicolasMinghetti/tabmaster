@@ -54,8 +54,35 @@ public class Scrolling extends Activity {
         } else {
             tablature= (String) savedInstanceState.getSerializable("MusicTablature");
         }
-        System.out.println(tablature);
 
+        String owner;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                owner= null;
+            } else {
+                owner= extras.getString("MusicOwner");
+            }
+        } else {
+            owner= (String) savedInstanceState.getSerializable("MusicOwner");
+        }
+
+        String title;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                title= null;
+            } else {
+                title= extras.getString("MusicTitle");
+            }
+        } else {
+            title= (String) savedInstanceState.getSerializable("MusicTitle");
+        }
+
+        TextView songTitle = (TextView)findViewById(R.id.songTitle);
+        songTitle.setText(title);
+        TextView songOwner = (TextView)findViewById(R.id.songOwner);
+        songOwner.setText(owner);
         // For verticalSrollview, from : https://github.com/blessenm/AndroidAutoScrollListView
         horizontalScrollview  =   (HorizontalScrollView) findViewById(R.id.horizontal_scrollview_id2);
 

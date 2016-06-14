@@ -117,11 +117,15 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         author.setText(tab.getOwner());
 
         final String tablature=tab.getTablature();
+        final String owner=tab.getOwner();
+        final String titleT=tab.getTitle();
         viewHolder.playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent intent;
                 intent =  new Intent(context, Scrolling.class);
+                intent.putExtra("MusicOwner", owner);
+                intent.putExtra("MusicTitle", titleT);
                 intent.putExtra("MusicTablature", tablature);
 
                 context.startActivity(intent);
