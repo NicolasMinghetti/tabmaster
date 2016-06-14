@@ -18,7 +18,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,7 +27,8 @@
         </activity>
         <activity
             android:name=".Scrolling"
-            android:label="@string/title_defilement" >
+            android:label="@string/title_defilement"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
         <activity
             android:name=".FacebookConnect"

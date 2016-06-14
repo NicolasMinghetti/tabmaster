@@ -251,7 +251,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
             try {
                 //final String url = context.getResources().getString(R.string.serveur_ip)+"/music/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
                 MusicAppli tab = mTabs.get(positionG);
-                final String url = "http://10.0.2.2:8000/music/"+tab.getId()+"/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
+                final String url = context.getResources().getString(R.string.serveur_ip)+"music/"+tab.getId()+"/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
 
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());

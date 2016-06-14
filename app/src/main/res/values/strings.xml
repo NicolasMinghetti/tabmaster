@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Tabmaster</string>
-    <string name="serveur_ip">http://10.43.6.167:80</string>
+    <string name="serveur_ip">http://10.0.2.2:8000</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="facebook_app_id">955203431265082</string>
     <string name="action_settings">Settings</string>
     <string name="title_defilement">Scrolling</string>
-    <string name="title_facebook">Facebook connexion page</string>
+    <string name="title_facebook">Facebook connection page</string>
     <string name="connection_state">Not Connected</string>
     <string name="id_label">The ID is</string>
     <string name="id_value">[id]</string>

@@ -128,9 +128,6 @@ public class MainActivity extends AppCompatActivity
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
 
-        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setCheckedItem(id);
-*/
         // Set action bar title
         setTitle(menuItem.getTitle());
 
