@@ -58,6 +58,7 @@ public class NewTabDialogFragment extends DialogFragment {
 
                         newMusic.setTitle(title.getText().toString());
                         newMusic.setOwner(author.getText().toString());
+                        newMusic.setNum_stars((float)3);
                         new HttpRequestTaskSendUpdate().execute();
                     }
                 })
@@ -73,12 +74,12 @@ public class NewTabDialogFragment extends DialogFragment {
         @Override
         protected Music[] doInBackground(Void... params) {
             try {
-                final String url = getResources().getString(R.string.serveur_ip) + "music/";
+                final String url = getResources().getString(R.string.serveur_ip) + "/music";
 
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Log.i("NewTabDialogFragment", "Sending new tab  : " + newMusic.getTitle() + " " + newMusic.getOwner() + " " + newMusic.getTablature());
-                restTemplate.put( url, newMusic, Music.class);
+                restTemplate.postForObject(url,newMusic,Music.class);
 
                 //return music;
             } catch (Exception e) {
