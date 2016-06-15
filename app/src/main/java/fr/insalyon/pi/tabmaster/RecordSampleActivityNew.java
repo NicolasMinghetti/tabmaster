@@ -49,7 +49,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     private Timer clickTimer		=	null;
     private Timer faceTimer         =   null;
     private TextView textView;
-    private LinearLayout parent;
+    public LinearLayout parentView;
     private UserInterface ui;
     private Boolean next=false;
     private TextView bpmLabel;
@@ -122,21 +122,21 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                 }
             }
         });
-        parent = (LinearLayout) findViewById(R.id.ll_example);
-        parent.setOrientation(LinearLayout.HORIZONTAL);
+        parentView = (LinearLayout) findViewById(R.id.ll_example);
+        parentView.setOrientation(LinearLayout.HORIZONTAL);
 
         for(int j=0; j<10;j++){                 // To add some space at beginning
             textView = new TextView(getApplicationContext());
             textView.setText(" " + "\n" + " " + "\n" + " " + "\n" + " " + "\n" + " " + "\n" + " " + "\n");
             textView.setTextSize(30);
             textView.setTypeface(Typeface.MONOSPACE);
-            parent.addView(textView);
+            parentView.addView(textView);
         }
         textView = new TextView(this);
         textView.setText("E\nB\nG\nD\nA\nE");
         textView.setTextSize(30);
         textView.setTypeface(Typeface.MONOSPACE);
-        parent.addView(textView);
+        parentView.addView(textView);
         /*try {
             startUserInteface();
         } catch (IOException e) {
@@ -169,7 +169,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         ai = new AudioIn(this);
     }
     private void startUserInteface() throws IOException {
-        ui = new UserInterface(this);
+        ui = new UserInterface();
     }
 
     private void stopRecording() {
@@ -207,7 +207,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     }
     class UserInterface extends Thread {
 
-        UserInterface(AppCompatActivity parent) {
+        UserInterface() {
             start();
         }
         @Override
@@ -230,7 +230,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                                 textView.setText("1\n2\n3\n4\n5\n5\n6\n");
                                 textView.setTextSize(30);
                                 textView.setTypeface(Typeface.MONOSPACE);
-                                parent.addView(textView);
+                                parentView.addView(textView);
 
                             }
                         });
@@ -362,7 +362,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                             textView.setText("1\n2\n3\n4\n5\n5\n");
                             textView.setTextSize(30);
                             textView.setTypeface(Typeface.MONOSPACE);
-                            parent.addView(textView);
+                            parentView.addView(textView);
                             bpmLabel.setText("test");
 
                         }
