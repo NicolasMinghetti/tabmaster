@@ -31,7 +31,6 @@ import fr.insalyon.pi.tabmaster.models.MusicAppli;
 public class TabLibraryFragment extends android.support.v4.app.Fragment {
 
     private ArrayList<MusicAppli> tabs=new ArrayList<MusicAppli>();
-    private TextView title;
     private Context ctx;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
