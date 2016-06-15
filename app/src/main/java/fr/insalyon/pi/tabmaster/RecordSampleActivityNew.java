@@ -38,9 +38,9 @@ import fr.insalyon.pi.tabmaster.fragments.NewTabDialogFragment;
 
 public class RecordSampleActivityNew extends AppCompatActivity {
     private HorizontalScrollView horizontalScrollview;
-    private int speed               =   500;      // Default speed
+    private int speed               =   25;      // Default speed
     private int oldSpeed;
-    private int horizontalScrollMax   = 6280;     // A adapter à la longueur de la tablature
+    private int horizontalScrollMax   = 62800;     // A adapter à la longueur de la tablature
     private Timer scrollTimer		=	null;
     private TimerTask clickSchedule;
     private TimerTask scrollerSchedule;
@@ -299,6 +299,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     in.close();
 
                     parsedResponse = dataToTab(response);
+                    System.out.println("tab = " + parsedResponse);
                     ///////////////////
                     final String[] parts = parsedResponse.split("/");
 
@@ -346,9 +347,11 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                 for(int i=0; i<tabArray.length; i++){
                     elem = tabArray[i];
                     if(elem.equals("-1")){
-                        tab += "-";
-                    }else{
+                        tab += "- ";
+                    }else if(elem.length()>1){
                         tab += elem;
+                    }else{
+                        tab += elem + " ";
                     }
 
                     if(i%6==5){
