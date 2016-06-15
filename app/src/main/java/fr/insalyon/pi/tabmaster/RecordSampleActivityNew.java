@@ -351,6 +351,8 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     }
                     System.out.println("Response is :" +response);
                     in.close();
+
+                    
                     ///////////////////
                     System.out.println("un next est arrivé");
                     runOnUiThread(new Runnable() {
