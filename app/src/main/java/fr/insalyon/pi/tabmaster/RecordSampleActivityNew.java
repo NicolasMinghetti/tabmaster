@@ -205,11 +205,14 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         }
         @Override
         public void run() {
-            android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
+            System.out.println("lancement du thread");
+
             try { // ... initialise
 
                 while (true) {
                     if(next) {
+                        System.out.println("un next est arrivé");
+
                         textView = new TextView(getApplicationContext());
                         //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
                         textView.setText("1\n2\n3\n4\n5\n5\n6\n");
@@ -217,11 +220,13 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                         textView.setTypeface(Typeface.MONOSPACE);
                         parent.addView(textView);
                         next=false;
+                        System.out.println("textview a été incrémenté");
+
                     }
                 }
 
             }catch (Throwable x) {
-                Log.w("AudioIn", "Error reading voice audio", x);
+                Log.w("UserInterface", "Error adding view to user interface", x);
             }
         }
     }
@@ -241,6 +246,8 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         @Override
         public void run() {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
+            System.out.println("startUser interface is called");
+
             try {
                 startUserInteface();
             } catch (IOException e) {
@@ -332,6 +339,8 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     }
                     System.out.println("Response is :" +response);
                     in.close();
+                    System.out.println("next is set true");
+
                     next = true;
 
                     //buffering response
