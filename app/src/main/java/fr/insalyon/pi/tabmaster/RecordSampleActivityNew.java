@@ -15,7 +15,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -79,26 +78,8 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                 horizontalScrollview.scrollTo(0,0);
             }
         });
-        final Button okButton = (Button) findViewById(R.id.button);
-        final EditText bpmRate = (EditText) findViewById(R.id.bpm);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View vue) {
-                int nBpmRate;
-                try
-                {
-                    nBpmRate = Integer.parseInt(String.valueOf(bpmRate.getText()));
-                }
-                catch (NumberFormatException e)
-                {
-                    nBpmRate=90;
-                }
-                Log.i("New speed set to", String.valueOf(nBpmRate));
-                speed=(int)(nBpmRate*71/2000);      // A Adapter par la suite, le nombre dépend de la largeur de l'écran du téléphone. Mais c'est suffisant pour le MVP.
-                Log.i("Speed is now", String.valueOf(speed));
-                horizontalScrollview.scrollTo(0,0);
-            }
-        });
+
+
         final ImageView playButton=(ImageView) findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
