@@ -332,7 +332,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void i){
                 if(stopped) { //if last frame
-                    NewTabDialogFragment ntd = NewTabDialogFragment.newInstance(finalTab.toString()); //cast the received tab into a string
+                    NewTabDialogFragment ntd = NewTabDialogFragment.newInstance(parsedResponse); //cast the received tab into a string
                     ntd.show(fragmentManager, "tabdialog"); //start the create new tab dialog passing it the tab
                 }
             }
