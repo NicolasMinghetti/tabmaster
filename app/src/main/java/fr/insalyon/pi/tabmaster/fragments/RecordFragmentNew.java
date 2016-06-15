@@ -34,8 +34,6 @@ public class RecordFragmentNew extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.record_fragment, container, false);
 
         //Instancing UI elements
-        title = (TextView)view.findViewById(R.id.rec_title);
-        recTestBtn = (Button)view.findViewById(R.id.rec_test_button);
         title2 = (TextView)view.findViewById(R.id.rec2_title);
         rec2Btn = (Button)view.findViewById(R.id.rec_test2_button);
         return view;
