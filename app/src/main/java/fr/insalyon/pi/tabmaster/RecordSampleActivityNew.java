@@ -51,6 +51,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     private TextView textView;
     private LinearLayout parent;
     private UserInterface ui;
+    private Boolean next=false;
 
     private AudioIn ai;
     private StringBuffer finalTab;
@@ -207,14 +208,17 @@ public class RecordSampleActivityNew extends AppCompatActivity {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
             try { // ... initialise
 
-
-                textView = new TextView(getApplicationContext());
-                //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
-                textView.setText("1\n2\n3\n4\n5\n5\n6\n");
-                textView.setTextSize(30);
-                textView.setTypeface(Typeface.MONOSPACE);
-                parent.addView(textView);
-
+                while (true) {
+                    if(next) {
+                        textView = new TextView(getApplicationContext());
+                        //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
+                        textView.setText("1\n2\n3\n4\n5\n5\n6\n");
+                        textView.setTextSize(30);
+                        textView.setTypeface(Typeface.MONOSPACE);
+                        parent.addView(textView);
+                        next=false;
+                    }
+                }
 
             }catch (Throwable x) {
                 Log.w("AudioIn", "Error reading voice audio", x);
@@ -328,6 +332,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     }
                     System.out.println("Response is :" +response);
                     in.close();
+                    next = true;
 
                     //buffering response
                     finalTab.append(response);
