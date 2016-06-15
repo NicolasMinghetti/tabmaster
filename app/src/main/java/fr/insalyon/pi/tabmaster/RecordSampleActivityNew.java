@@ -360,11 +360,10 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                             textView = new TextView(getApplicationContext());
                             //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
                             textView.setText("1\n2\n3\n4\n5\n5\n");
-                            textView.setTextSize(30);
+                            textView.setTextSize(100);
                             textView.setTypeface(Typeface.MONOSPACE);
                             parentView.addView(textView);
                             bpmLabel.setText("test");
-
                         }
                     });
                     System.out.println("textview a été incrémenté");
