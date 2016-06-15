@@ -201,7 +201,6 @@ public class Scrolling extends Activity {
             };
 
             scrollTimer.schedule(scrollerSchedule, 30, 30);
-
         }
     }
 
@@ -211,7 +210,6 @@ public class Scrolling extends Activity {
             scrollPos						=	0;
         }
         horizontalScrollview.scrollTo(scrollPos,0);
-        //Log.e("moveScrollView","moveScrollView");
     }
 
     public void onBackPressed(){
