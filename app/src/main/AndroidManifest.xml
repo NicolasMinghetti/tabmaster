@@ -43,6 +43,10 @@
             android:label="@string/rec_samp_act" >
         </activity>
         <activity
+            android:name=".RecordSampleActivityNew"
+            android:label="@string/rec_samp_act" >
+        </activity>
+        <activity
             android:name=".FacebookComments"
             android:label="@string/title_facebook_comments" >
         </activity>
