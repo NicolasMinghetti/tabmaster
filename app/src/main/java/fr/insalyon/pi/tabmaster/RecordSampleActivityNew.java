@@ -180,6 +180,11 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    try {
+                        startUserInteface();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 }
                 case R.id.btnStop: {
@@ -248,11 +253,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
             System.out.println("startUser interface is called");
 
-            try {
-                startUserInteface();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
             AudioRecord recorder;
             short[] buffer = new short[44100]; //buffer containing the 44100 samples
 
