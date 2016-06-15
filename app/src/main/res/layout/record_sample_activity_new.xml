@@ -27,6 +27,14 @@
             android:text="Stop"
             android:id="@+id/btnStop"
             android:layout_gravity="center_horizontal" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rec_smp_title"
+            android:layout_toEndOf="@id/btnStop"
+            android:text="Save"
+            android:id="@+id/btnSave"
+            android:layout_gravity="center_horizontal" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -140,7 +140,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
                 suppId=position;
                 new HttpRequestTaskSendDelete().execute();
                 //mTabs.remove(position);
-                Toast.makeText(context, "Votre suppression a été pris en compte !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Tab deleted.", Toast.LENGTH_SHORT).show();
             }
         });
 

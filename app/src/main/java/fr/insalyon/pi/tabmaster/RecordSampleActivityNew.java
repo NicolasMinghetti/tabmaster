@@ -19,6 +19,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,16 +51,20 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     private Timer faceTimer         =   null;
     private TextView textView;
     public LinearLayout parentView;
+    private Context ctx;
 
 
     private AudioIn ai;
     private StringBuffer finalTab;
     private FragmentManager fragmentManager;
+    private String parsedResponse;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.record_sample_activity_new);
+        ctx = getApplicationContext();
 
         horizontalScrollview  =   (HorizontalScrollView) findViewById(R.id.horizontal_scrollview_id2);
 
@@ -124,6 +129,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     private void setButtonHandlers() {
         ((Button) findViewById(R.id.btnStart)).setOnClickListener(btnClick);
         ((Button) findViewById(R.id.btnStop)).setOnClickListener(btnClick);
+        ((Button) findViewById(R.id.btnSave)).setOnClickListener(btnClick);
     }
 
     private void enableButton(int id, boolean isEnable) {
@@ -159,6 +165,12 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                 case R.id.btnStop: {
                     enableButtons(false);
                     stopRecording();
+                    break;
+                }
+                case R.id.btnSave: {
+                    NewTabDialogFragment ntd = NewTabDialogFragment.newInstance(finalTab.toString()); //cast the received tab into a string
+                    ntd.show(fragmentManager, "tabdialog"); //start the create new tab dialog passing it the tab
+                    Toast.makeText(ctx, "Tab saved !", Toast.LENGTH_SHORT).show();
                     break;
                 }
             }
@@ -238,7 +250,6 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         private class HttpTabManager extends AsyncTask<Void, Void, Void>{
 
             String dataToSend;
-            String parsedResponse;
 
             public HttpTabManager(String dataToSend){
                 this.dataToSend = dataToSend;
@@ -300,7 +311,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     });
 
                     //buffering response
-                    finalTab.append(response);
+                    finalTab.append(parsedResponse);
 
                     //print result
                 }catch(Exception e){
@@ -312,10 +323,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Void i){
-                if(stopped) { //if last frame
-                    NewTabDialogFragment ntd = NewTabDialogFragment.newInstance(parsedResponse); //cast the received tab into a string
-                    ntd.show(fragmentManager, "tabdialog"); //start the create new tab dialog passing it the tab
-                }
+
             }
 
             public String dataToTab(StringBuffer data){
