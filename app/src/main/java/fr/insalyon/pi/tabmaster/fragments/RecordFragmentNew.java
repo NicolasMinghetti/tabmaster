@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import fr.insalyon.pi.tabmaster.R;
 import fr.insalyon.pi.tabmaster.RecordSampleActivityNew;
-import fr.insalyon.pi.tabmaster.RecordTestActivity;
 
 /**
  * Created by Ugo on 31/05/2016.
@@ -43,15 +42,6 @@ public class RecordFragmentNew extends android.support.v4.app.Fragment {
         super.onActivityCreated(savedInstanceState);
         //Get activity that uses this fragment
         ctx = getActivity();
-        recTestBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent nextActivity = new Intent(ctx, RecordTestActivity.class);
-                startActivity(nextActivity);
-            }
-        });
 
         rec2Btn.setOnClickListener(new View.OnClickListener()
         {
