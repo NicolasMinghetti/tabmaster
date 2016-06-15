@@ -51,9 +51,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     private Timer faceTimer         =   null;
     private TextView textView;
     public LinearLayout parentView;
-    private UserInterface ui;
-    private Boolean next=false;
-    private TextView bpmLabel;
+
 
     private AudioIn ai;
     private StringBuffer finalTab;
@@ -63,10 +61,6 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.record_sample_activity_new);
-
-        ////////////
-
-
 
         horizontalScrollview  =   (HorizontalScrollView) findViewById(R.id.horizontal_scrollview_id2);
 
@@ -138,13 +132,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         textView.setTextSize(30);
         textView.setTypeface(Typeface.MONOSPACE);
         parentView.addView(textView);
-        /*try {
-            startUserInteface();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-        bpmLabel = (TextView) findViewById(R.id.bpmLabel) ;
-        /////////////
+
         setButtonHandlers();
         enableButtons(false);
 
@@ -168,9 +156,6 @@ public class RecordSampleActivityNew extends AppCompatActivity {
 
     private void startRecording() throws IOException {
         ai = new AudioIn(this);
-    }
-    private void startUserInteface() throws IOException {
-        ui = new UserInterface();
     }
 
     private void stopRecording() {
@@ -205,46 +190,6 @@ public class RecordSampleActivityNew extends AppCompatActivity {
             finish();
         }
         return super.onKeyDown(keyCode, event);
-    }
-    class UserInterface extends Thread {
-
-        UserInterface() {
-            start();
-        }
-        @Override
-        public void run() {
-            System.out.println("lancement du thread");
-
-            try { // ... initialise
-
-                while (true) {
-                    if(next) {
-                        next=false;
-                        System.out.println("un next est arrivé");
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                System.out.println("un runinThread est en cours");
-
-                                textView = new TextView(getApplicationContext());
-                                //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
-                                textView.setText("1\n2\n3\n4\n5\n5\n6\n");
-                                textView.setTextSize(30);
-                                textView.setTypeface(Typeface.MONOSPACE);
-                                parentView.addView(textView);
-
-                            }
-                        });
-
-                        System.out.println("textview a été incrémenté");
-
-                    }
-                }
-
-            }catch (Throwable x) {
-                Log.w("UserInterface", "Error adding view to user interface", x);
-            }
-        }
     }
 
     //Thread managing audio recording
@@ -355,23 +300,23 @@ public class RecordSampleActivityNew extends AppCompatActivity {
 
                     parsedResponse = dataToTab(response);
                     ///////////////////
-                    System.out.println("un next est arrivé");
+                    final String[] parts = parsedResponse.split("/");
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            System.out.println("un runinThread est en cours");
-
-                            textView = new TextView(getApplicationContext());
-                            //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
-                            textView.setText("1\n2\n3\n4\n5\n5\n");
-                            textView.setTextSize(30);
-                            textView.setTextColor(Color.BLACK);
-                            textView.setTypeface(Typeface.MONOSPACE);
-                            parentView.addView(textView);
+                            for (String s:parts) {
+                                textView = new TextView(getApplicationContext());
+                                //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
+                                textView.setText("1\n2\n3\n4\n5\n5\n");
+                                textView.setTextSize(30);
+                                textView.setTextColor(Color.BLACK);
+                                textView.setTypeface(Typeface.MONOSPACE);
+                                parentView.addView(textView);
+                            }
                         }
                     });
-                    System.out.println("textview a été incrémenté");
-                    ////////////////
+
                     //buffering response
                     finalTab.append(response);
 
