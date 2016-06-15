@@ -38,9 +38,9 @@ import fr.insalyon.pi.tabmaster.fragments.NewTabDialogFragment;
 
 public class RecordSampleActivityNew extends AppCompatActivity {
     private HorizontalScrollView horizontalScrollview;
-    private int speed               =   5;      // Default speed
+    private int speed               =   25;      // Default speed
     private int oldSpeed;
-    private int horizontalScrollMax   = 6280;     // A adapter à la longueur de la tablature
+    private int horizontalScrollMax   = 62800;     // A adapter à la longueur de la tablature
     private Timer scrollTimer		=	null;
     private TimerTask clickSchedule;
     private TimerTask scrollerSchedule;
@@ -308,7 +308,8 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                         public void run() {
                             for (String s:parts) {
                                 textView = new TextView(getApplicationContext());
-                                textView.setText(s.charAt(0)+s.charAt(1) + "\n" + s.charAt(2)+s.charAt(3) + "\n" + s.charAt(4)+s.charAt(5) + "\n" + s.charAt(6)+s.charAt(7) + "\n" + s.charAt(8)+s.charAt(9) + "\n" + s.charAt(10)+s.charAt(11) + "\n");
+                                System.out.println("Parts is :" +s);
+                                textView.setText(s.charAt(0)+ "" +s.charAt(1) + "\n" + s.charAt(2)+s.charAt(3) + "\n" + s.charAt(4)+s.charAt(5) + "\n" + s.charAt(6)+s.charAt(7) + "\n" + s.charAt(8)+s.charAt(9) + "\n" + s.charAt(10)+s.charAt(11) + "\n");
                                 //textView.setText("1\n2\n3\n4\n5\n5\n");
                                 textView.setTextSize(30);
                                 textView.setTextColor(Color.BLACK);
@@ -347,7 +348,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                 for(int i=0; i<tabArray.length; i++){
                     elem = tabArray[i];
                     if(elem.equals("-1")){
-                        tab += "--";
+                        tab += "- ";
                     }else if(elem.length()>1){
                         tab += elem;
                     }else{
