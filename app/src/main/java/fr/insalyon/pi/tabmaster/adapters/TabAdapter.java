@@ -35,6 +35,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
     private List<MusicAppli> mTabs;
     public int positionG;
     public int newStar;
+    public int suppId;
     private static Context context;
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -43,7 +44,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         // Your holder should contain a member variable for any view that will be set as you render a rowaccess
         private TextView titleTV;
         private TextView authorTV;
-        private ImageButton openBtn;
+        private ImageButton deleteBtn;
         private ImageButton playBtn;
         private ImageButton commentsBtn;
         private ImageButton star1;
@@ -73,7 +74,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
             titleTV = (TextView) itemView.findViewById(R.id.titleTV);
             authorTV = (TextView) itemView.findViewById(R.id.authorTV);
-            openBtn = (ImageButton) itemView.findViewById(R.id.openButton);
+            deleteBtn = (ImageButton) itemView.findViewById(R.id.deleteButton);
             playBtn = (ImageButton) itemView.findViewById(R.id.playButton);
             commentsBtn = (ImageButton) itemView.findViewById(R.id.commentsButton);
             star1 = (ImageButton) itemView.findViewById(R.id.star1);
@@ -105,7 +106,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(TabAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final TabAdapter.ViewHolder viewHolder, final int position) {
         // Get the data model based on position
         MusicAppli tab = mTabs.get(position);
 
@@ -132,8 +133,18 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
             }
         });
-
         final int idMusic=tab.getId();
+        viewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                suppId=position;
+                new HttpRequestTaskSendDelete().execute();
+                //mTabs.remove(position);
+                Toast.makeText(context, "Votre suppression a été pris en compte !", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         viewHolder.commentsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,6 +289,22 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
 
 
                 //return music;
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+            return null;
+        }
+    }
+    private class HttpRequestTaskSendDelete extends AsyncTask<Void, Void, Music[]> {
+        @Override
+        protected Music[] doInBackground(Void... params) {
+            try {
+                MusicAppli tab = mTabs.get(suppId);
+                final String url = context.getResources().getString(R.string.serveur_ip)+"music/"+tab.getId()+"/"; // Adresse is 10.0.2.2 and not 127.0.0.1 because on virtual machine
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                restTemplate.delete(url, Music.class);
+
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);
             }
