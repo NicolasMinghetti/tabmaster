@@ -307,8 +307,8 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                         public void run() {
                             for (String s:parts) {
                                 textView = new TextView(getApplicationContext());
-                                //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
-                                textView.setText("1\n2\n3\n4\n5\n5\n");
+                                textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
+                                //textView.setText("1\n2\n3\n4\n5\n5\n");
                                 textView.setTextSize(30);
                                 textView.setTextColor(Color.BLACK);
                                 textView.setTypeface(Typeface.MONOSPACE);
