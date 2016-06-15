@@ -42,12 +42,12 @@ public class FacebookConnectFragment extends android.support.v4.app.Fragment {
         TextView info= (TextView)view.findViewById(R.id.info);
         Button btn = (Button) view.findViewById(R.id.facebook_btn);
         if(loggedIn){
-            btn.setText("Se déconnecter de Facebook");
-            info.setText("Tu es déjà connecté "+Profile.getCurrentProfile().getFirstName());
+            btn.setText("Log out Facebook");
+            info.setText("You are connected "+Profile.getCurrentProfile().getFirstName());
             Log.i("User connected, profile", Profile.getCurrentProfile().getFirstName()+" "+Profile.getCurrentProfile().getLastName());
         } else {
-            btn.setText("Se connecter avec Facebook");
-            info.setText("Tu n'es pas encore connecté");
+            btn.setText("Log in with Facebook");
+            info.setText("You are not connected.");
             Log.i("Connection State", String.valueOf(loggedIn));
         }
 

@@ -42,5 +42,5 @@
         android:theme="@style/Button"
         android:textColor="@color/light"
         android:layout_gravity="center"
-        android:text="Retourner sur la page d'accueil" />
+        android:text="@string/return_homepage" />
 </LinearLayout>

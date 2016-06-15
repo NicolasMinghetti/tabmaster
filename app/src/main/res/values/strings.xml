@@ -30,7 +30,7 @@
     <string name="reglages">Settings</string>
     <string name="homepage">Homepage</string>
     <string name="title_record">Record</string>
-
+    <string name="return_homepage">Get back on the homepage</string>
 
 
 </resources>
