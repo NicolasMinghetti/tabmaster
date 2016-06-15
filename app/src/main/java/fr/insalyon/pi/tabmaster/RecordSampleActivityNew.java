@@ -299,6 +299,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     in.close();
 
                     parsedResponse = dataToTab(response);
+                    System.out.println("tab = " + parsedResponse);
                     ///////////////////
                     final String[] parts = parsedResponse.split("/");
 
@@ -346,9 +347,11 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                 for(int i=0; i<tabArray.length; i++){
                     elem = tabArray[i];
                     if(elem.equals("-1")){
-                        tab += "-";
-                    }else{
+                        tab += "--";
+                    }else if(elem.length()>1){
                         tab += elem;
+                    }else{
+                        tab += elem + " ";
                     }
 
                     if(i%6==5){
