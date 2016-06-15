@@ -216,15 +216,23 @@ public class RecordSampleActivityNew extends AppCompatActivity {
 
                 while (true) {
                     if(next) {
-                        System.out.println("un next est arrivé");
 
-                        textView = new TextView(getApplicationContext());
-                        //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
-                        textView.setText("1\n2\n3\n4\n5\n5\n6\n");
-                        textView.setTextSize(30);
-                        textView.setTypeface(Typeface.MONOSPACE);
-                        parent.addView(textView);
-                        next=false;
+                        System.out.println("un next est arrivé");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.out.println("un runinThread est en cours");
+
+                                textView = new TextView(getApplicationContext());
+                                //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
+                                textView.setText("1\n2\n3\n4\n5\n5\n6\n");
+                                textView.setTextSize(30);
+                                textView.setTypeface(Typeface.MONOSPACE);
+                                parent.addView(textView);
+                                next=false;
+                            }
+                        });
+
                         System.out.println("textview a été incrémenté");
 
                     }
