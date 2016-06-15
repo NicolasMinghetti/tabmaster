@@ -172,7 +172,7 @@ public class Scrolling extends Activity {
         for (String s:parts) {
 
             textView = new TextView(this);
-            textView.setText(s.charAt(0)+s.charAt(1) + "\n" + s.charAt(2)+s.charAt(3) + "\n" + s.charAt(4)+s.charAt(5) + "\n" + s.charAt(6)+s.charAt(7) + "\n" + s.charAt(8)+s.charAt(9) + "\n" + s.charAt(10)+s.charAt(11) + "\n");
+            textView.setText(s.charAt(0)+""+s.charAt(1) + "\n" + s.charAt(2)+s.charAt(3) + "\n" + s.charAt(4)+s.charAt(5) + "\n" + s.charAt(6)+s.charAt(7) + "\n" + s.charAt(8)+s.charAt(9) + "\n" + s.charAt(10)+s.charAt(11) + "\n");
             textView.setTextSize(30);
             textView.setTypeface(Typeface.MONOSPACE);
             parent.addView(textView);
