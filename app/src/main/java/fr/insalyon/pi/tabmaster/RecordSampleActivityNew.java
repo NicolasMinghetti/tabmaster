@@ -136,7 +136,11 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         textView.setTextSize(30);
         textView.setTypeface(Typeface.MONOSPACE);
         parent.addView(textView);
-
+        try {
+            startUserInteface();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         /////////////
         setButtonHandlers();
         enableButtons(false);
@@ -180,11 +184,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    try {
-                        startUserInteface();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
                     break;
                 }
                 case R.id.btnStop: {
