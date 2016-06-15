@@ -52,6 +52,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     private LinearLayout parent;
     private UserInterface ui;
     private Boolean next=false;
+    private TextView bpmLabel;
 
     private AudioIn ai;
     private StringBuffer finalTab;
@@ -141,6 +142,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+        bpmLabel = (TextView) findViewById(R.id.bpmLabel) ;
         /////////////
         setButtonHandlers();
         enableButtons(false);
@@ -361,10 +363,10 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                             textView.setTextSize(30);
                             textView.setTypeface(Typeface.MONOSPACE);
                             parent.addView(textView);
+                            bpmLabel.setText("test");
 
                         }
                     });
-
                     System.out.println("textview a été incrémenté");
                     ////////////////
                     //buffering response
