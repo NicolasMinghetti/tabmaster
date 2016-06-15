@@ -80,6 +80,12 @@ public class MainActivity extends AppCompatActivity
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (id == R.id.nav_record_new) {
+            try {
+                fragment = new RecordFragment();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (id == R.id.nav_facebook_connection) {
 
             /*Intent secondeActivite = new Intent(ctx, FacebookConnect.class);
