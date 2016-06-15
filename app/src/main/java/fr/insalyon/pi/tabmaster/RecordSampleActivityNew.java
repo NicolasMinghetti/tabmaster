@@ -136,11 +136,11 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         textView.setTextSize(30);
         textView.setTypeface(Typeface.MONOSPACE);
         parent.addView(textView);
-        try {
+        /*try {
             startUserInteface();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         /////////////
         setButtonHandlers();
         enableButtons(false);
@@ -216,7 +216,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
 
                 while (true) {
                     if(next) {
-
+                        next=false;
                         System.out.println("un next est arrivé");
                         runOnUiThread(new Runnable() {
                             @Override
@@ -229,7 +229,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                                 textView.setTextSize(30);
                                 textView.setTypeface(Typeface.MONOSPACE);
                                 parent.addView(textView);
-                                next=false;
+
                             }
                         });
 
@@ -348,10 +348,25 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     }
                     System.out.println("Response is :" +response);
                     in.close();
-                    System.out.println("next is set true");
+                    ///////////////////
+                    System.out.println("un next est arrivé");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("un runinThread est en cours");
 
-                    next = true;
+                            textView = new TextView(getApplicationContext());
+                            //textView.setText(s.charAt(0) + "\n" + s.charAt(1) + "\n" + s.charAt(2) + "\n" + s.charAt(3) + "\n" + s.charAt(4) + "\n" + s.charAt(5) + "\n");
+                            textView.setText("1\n2\n3\n4\n5\n5\n");
+                            textView.setTextSize(30);
+                            textView.setTypeface(Typeface.MONOSPACE);
+                            parent.addView(textView);
 
+                        }
+                    });
+
+                    System.out.println("textview a été incrémenté");
+                    ////////////////
                     //buffering response
                     finalTab.append(response);
 
