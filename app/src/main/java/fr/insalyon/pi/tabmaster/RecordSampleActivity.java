@@ -204,6 +204,7 @@ public class RecordSampleActivity extends AppCompatActivity {
 
                     //buffering response
                     finalTab.append(dataToTab(response));
+                    System.out.println(dataToTab(response));
 
                     //print result
                 }catch(Exception e){

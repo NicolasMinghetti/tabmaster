@@ -312,6 +312,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         private class HttpTabManager extends AsyncTask<Void, Void, Void>{
 
             String dataToSend;
+            String parsedResponse;
 
             public HttpTabManager(String dataToSend){
                 this.dataToSend = dataToSend;
@@ -352,7 +353,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     System.out.println("Response is :" +response);
                     in.close();
 
-                    
+                    parsedResponse = dataToTab(response);
                     ///////////////////
                     System.out.println("un next est arrivé");
                     runOnUiThread(new Runnable() {
@@ -388,6 +389,28 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     NewTabDialogFragment ntd = NewTabDialogFragment.newInstance(finalTab.toString()); //cast the received tab into a string
                     ntd.show(fragmentManager, "tabdialog"); //start the create new tab dialog passing it the tab
                 }
+            }
+
+            public String dataToTab(StringBuffer data){
+                String tab = "";
+                String elem;
+                String[] tabArray;
+
+                tabArray = (data.toString()).replace("[", "").split(",|\\]");
+
+                for(int i=0; i<tabArray.length; i++){
+                    elem = tabArray[i];
+                    if(elem.equals("-1")){
+                        tab += "-";
+                    }else{
+                        tab += elem;
+                    }
+
+                    if(i%6==5){
+                        tab += "/";
+                    }
+                }
+                return tab;
             }
 
         }
