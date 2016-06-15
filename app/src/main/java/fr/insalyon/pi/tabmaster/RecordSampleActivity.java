@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
@@ -63,6 +64,7 @@ public class RecordSampleActivity extends AppCompatActivity {
 
     private void stopRecording() {
         ai.close();
+
     }
 
     private View.OnClickListener btnClick = new View.OnClickListener() {
@@ -130,6 +132,7 @@ public class RecordSampleActivity extends AppCompatActivity {
 
                 // ... loop
                 while (!stopped) {
+                    System.out.println("-------------------------------------------------------------------------------------------------------> stopped = "+stopped);
                     N = recorder.read(buffer, 0, buffer.length);
                     process(buffer);
                 }
@@ -149,6 +152,10 @@ public class RecordSampleActivity extends AppCompatActivity {
             dataToSend = Arrays.toString(buffer);
             dataToSend = dataToSend.replaceAll(" ", "").replace("[", "").replace("]", "");
             new HttpTabManager(dataToSend).execute();
+        }
+
+        void close() {
+            stopped = true;
         }
 
 
@@ -196,7 +203,7 @@ public class RecordSampleActivity extends AppCompatActivity {
                     in.close();
 
                     //buffering response
-                    finalTab.append(response);
+                    finalTab.append(dataToTab(response));
 
                     //print result
                 }catch(Exception e){
@@ -216,8 +223,26 @@ public class RecordSampleActivity extends AppCompatActivity {
 
         }
 
-        void close() {
-            stopped = true;
+        public String dataToTab(StringBuffer data){
+            String tab = "";
+            String elem;
+            String[] tabArray;
+
+            tabArray = (data.toString()).replace("[", "").split(",|\\]");
+
+            for(int i=0; i<tabArray.length; i++){
+                elem = tabArray[i];
+                if(elem.equals("-1")){
+                    tab += "-";
+                }else{
+                    tab += elem;
+                }
+
+                if(i%6==5){
+                    tab += "/";
+                }
+            }
+            return tab;
         }
 
     }

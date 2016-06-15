@@ -74,7 +74,7 @@ public class NewTabDialogFragment extends DialogFragment {
         @Override
         protected Music[] doInBackground(Void... params) {
             try {
-                final String url = getResources().getString(R.string.serveur_ip) + "/music";
+                final String url = getResources().getString(R.string.serveur_ip) + "/music/";
 
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
