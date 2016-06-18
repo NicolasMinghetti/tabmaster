@@ -12,6 +12,7 @@ public class Music {
 
     private int id;
     private String owner;
+    private String player;
     private Date created;
     private String title;
     private Float num_stars;
@@ -44,6 +45,8 @@ public class Music {
         return this.tablature;
     }
 
+    public String getPlayer() { return this.player; }
+
     @Override
     public String toString() {
         return "Music{" +
@@ -65,4 +68,6 @@ public class Music {
     public void setNum_stars_votes(int num_stars_votes) { this.num_stars_votes=num_stars_votes; }
 
     public void setTablature(String tablature) { this.tablature=tablature; }
+
+    public void setPlayer(String player) { this.player=player; }
 }

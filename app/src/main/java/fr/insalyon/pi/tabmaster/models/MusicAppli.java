@@ -9,6 +9,7 @@ public class MusicAppli {
 
     private int id;
     private String owner;
+    private String player;
     private Date created;
     private String title;
     private Float num_stars;
@@ -40,6 +41,8 @@ public class MusicAppli {
     public String getTablature() {
         return this.tablature;
     }
+
+    public String getPlayer() { return this.player; }
 
     @Override
     public String toString() {

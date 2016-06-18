@@ -282,6 +282,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
                 Music nouvelleMusic = new Music();
                 nouvelleMusic.setTitle(tab.getTitle());
                 nouvelleMusic.setOwner(tab.getOwner());
+                nouvelleMusic.setPlayer(tab.getPlayer());
                 nouvelleMusic.setNum_stars(new Float(newStar));
                 nouvelleMusic.setNum_stars_votes(tab.getNum_stars_votes());
                 nouvelleMusic.setTablature(tab.getTablature());

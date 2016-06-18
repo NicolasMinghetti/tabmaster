@@ -5,6 +5,7 @@ from django.db import models
 class Music(models.Model):
     id = models.AutoField(primary_key=True)
     created = models.DateTimeField(auto_now_add=True)
+    player = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     owner = models.CharField(max_length=100)
     num_stars = models.FloatField(blank=True, default='')
