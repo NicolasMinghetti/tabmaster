@@ -248,7 +248,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
 
                         byte byteAudioData[] = short2byte(audioData);
 
-                        os.write(byteAudioData, 0, N*10);
+                        os.write(byteAudioData);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
