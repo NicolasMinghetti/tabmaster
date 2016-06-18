@@ -115,7 +115,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         title.setText(tab.getTitle());
 
         TextView author = viewHolder.authorTV;
-        author.setText(tab.getOwner());
+        author.setText(tab.getOwner()+", "+tab.getPlayer());
 
         final String tablature=tab.getTablature();
         final String owner=tab.getOwner();

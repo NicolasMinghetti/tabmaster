@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.facebook.AccessToken;
+import com.facebook.Profile;
+
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -86,6 +89,13 @@ public class NewTabDialogFragment extends DialogFragment {
 
                         newMusic.setTitle(title);
                         newMusic.setOwner(owner);
+                        boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
+
+                        if(loggedIn){
+                            newMusic.setPlayer(Profile.getCurrentProfile().getFirstName());
+                        } else {
+                            newMusic.setPlayer("Admin");
+                        }
                         newMusic.setNum_stars((float)3);
                         newMusic.setAudio_file(renamedFile.getAbsolutePath());
                         new HttpRequestTaskSendUpdate().execute();
