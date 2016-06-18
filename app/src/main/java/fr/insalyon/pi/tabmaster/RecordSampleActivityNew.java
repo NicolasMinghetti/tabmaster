@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -58,6 +60,9 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     private StringBuffer finalTab;
     private FragmentManager fragmentManager;
     private String parsedResponse;
+
+    final String url = getResources().getString(R.string.serveur_ip)+"/recup";
+    final String filePath = "/sdcard/tabmaster/temp_recording";
 
 
     @Override
@@ -168,7 +173,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     break;
                 }
                 case R.id.btnSave: {
-                    NewTabDialogFragment ntd = NewTabDialogFragment.newInstance(finalTab.toString()); //cast the received tab into a string
+                    NewTabDialogFragment ntd = NewTabDialogFragment.newInstance(finalTab.toString(), filePath); //cast the received tab into a string
                     ntd.show(fragmentManager, "tabdialog"); //start the create new tab dialog passing it the tab
                     Toast.makeText(ctx, "Tab saved !", Toast.LENGTH_SHORT).show();
                     break;
@@ -189,7 +194,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     class AudioIn extends Thread {
         private boolean stopped = false;
         Context act;
-        final String url = getResources().getString(R.string.serveur_ip)+"/recup";
+
 
 
         AudioIn(AppCompatActivity parent) {
@@ -202,13 +207,12 @@ public class RecordSampleActivityNew extends AppCompatActivity {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
             System.out.println("startUser interface is called");
 
-
             AudioRecord recorder;
-            short[] buffer = new short[44100]; //buffer containing the 44100 samples
+            short[] audioData = new short[44100]; //buffer containing the 44100 samples
 
             try { // ... initialise
 
-                //set audio
+                //set audio recording
                 int N = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
 
                 recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
@@ -221,10 +225,38 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                 recorder.startRecording();
 
 
+
+                //set file writing stream
+                FileOutputStream os = null;
+                try {
+                    os = new FileOutputStream(filePath);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+
+
                 // ... loop
                 while (!stopped) {
-                    N = recorder.read(buffer, 0, buffer.length);
-                    process(buffer);
+                    //Read audio data
+                    N = recorder.read(audioData, 0, audioData.length);
+
+                    //Write audio to file
+                    System.out.println("Short wirting to file" + audioData.toString());
+                    try {
+                        // // writes the data to file from buffer
+                        // // stores the voice buffer
+
+                        byte byteAudioData[] = short2byte(audioData);
+
+                        os.write(byteAudioData, 0, N*10);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                    process(audioData);
                 }
 
                 recorder.stop();
@@ -238,12 +270,28 @@ public class RecordSampleActivityNew extends AppCompatActivity {
 
         //*
         private void process(short[] buffer) {
+            //write audio to file
+
+
+            //Parsing to string format
             String dataToSend = "";
             dataToSend = Arrays.toString(buffer);
             dataToSend = dataToSend.replaceAll(" ", "").replace("[", "").replace("]", "");
-            String lala="ss";
-
+            //Sending to server
             new HttpTabManager(dataToSend).execute();
+        }
+
+        private byte[] short2byte(short[] sData) {
+            int shortArrsize = sData.length;
+            byte[] bytes = new byte[shortArrsize * 2];
+
+            for (int i = 0; i < shortArrsize; i++) {
+                bytes[i * 2] = (byte) (sData[i] & 0x00FF);
+                bytes[(i * 2) + 1] = (byte) (sData[i] >> 8);
+                sData[i] = 0;
+            }
+            return bytes;
+
         }
 
 

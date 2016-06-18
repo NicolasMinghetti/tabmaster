@@ -17,6 +17,7 @@ public class Music {
     private Float num_stars;
     private int num_stars_votes;
     private String tablature;
+    private String audio_file;
 
     public int getId() {
         return this.id;
@@ -44,6 +45,10 @@ public class Music {
         return this.tablature;
     }
 
+    public String getAudio_file() {
+        return audio_file;
+    }
+
     @Override
     public String toString() {
         return "Music{" +
@@ -65,4 +70,10 @@ public class Music {
     public void setNum_stars_votes(int num_stars_votes) { this.num_stars_votes=num_stars_votes; }
 
     public void setTablature(String tablature) { this.tablature=tablature; }
+
+    public void setAudio_file(String audio_file) {
+        this.audio_file = audio_file;
+    }
+
+
 }
