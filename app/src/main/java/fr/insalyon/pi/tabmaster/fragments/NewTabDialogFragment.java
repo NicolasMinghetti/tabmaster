@@ -14,6 +14,8 @@ import android.widget.EditText;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
+
 import fr.insalyon.pi.tabmaster.R;
 import fr.insalyon.pi.tabmaster.models.Music;
 
@@ -21,16 +23,21 @@ import fr.insalyon.pi.tabmaster.models.Music;
  * Created by Ugo on 13/06/2016.
  */
 public class NewTabDialogFragment extends DialogFragment {
-    private EditText title;
-    private EditText author;
+    private EditText titleET;
+    private EditText authorET;
     private Music newMusic;
+    private String fileName;
+    private File oldFile;
+    private File renamedFile;
+    private boolean fbool;
 
-    public static NewTabDialogFragment newInstance(String tab) {
+    public static NewTabDialogFragment newInstance(String tab, String audioFileName) {
         NewTabDialogFragment ntdf = new NewTabDialogFragment();
 
         // Supply num input as an argument.
         Bundle args = new Bundle();
         args.putString("tab", tab);
+        args.putString("audioFileName", audioFileName);
         ntdf.setArguments(args);
 
         return ntdf;
@@ -43,8 +50,8 @@ public class NewTabDialogFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout. newtab_dialog_layout, null);
 
-        title = (EditText) view.findViewById(R.id.title_field);
-        author = (EditText) view.findViewById(R.id.author_field);
+        titleET = (EditText) view.findViewById(R.id.title_field);
+        authorET = (EditText) view.findViewById(R.id.author_field);
 
         newMusic = new Music();
         newMusic.setTablature(getArguments().getString("tab")); //get the tab from RecordSampleActivity
@@ -55,10 +62,32 @@ public class NewTabDialogFragment extends DialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        String title = titleET.getText().toString();
+                        String owner = authorET.getText().toString();
+                        fileName = title.replace(" ","_").replace(" ", "_") + title.replace(" ","_").replace(" ", "_");
 
-                        newMusic.setTitle(title.getText().toString());
-                        newMusic.setOwner(author.getText().toString());
+                        //rename file
+                        try{
+                            // create new File objects
+                            oldFile = new File(getArguments().getString("audioFileName"));
+                            renamedFile = new File(getArguments().getString("audioFileName").replace("temp_recording", "fileName"));
+
+                            // rename file
+                            fbool = oldFile.renameTo(renamedFile);
+
+                            // print
+                            System.out.print("File renamed? "+fbool);
+
+                        }catch(Exception e){
+                            // if any error occurs
+                            e.printStackTrace();
+                        }
+
+
+                        newMusic.setTitle(title);
+                        newMusic.setOwner(owner);
                         newMusic.setNum_stars((float)3);
+                        newMusic.setAudio_file(renamedFile.getAbsolutePath());
                         new HttpRequestTaskSendUpdate().execute();
                     }
                 })
