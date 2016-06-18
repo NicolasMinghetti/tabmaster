@@ -28,6 +28,7 @@
             android:text="Small Text"
             android:id="@+id/authorTV"
             android:layout_gravity="left" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="horizontal"
@@ -101,6 +102,7 @@
             android:src="@drawable/ic_comment_white_36dp"
             android:contentDescription="@string/open_comments"
             android:layout_gravity="right" />
+
     </RelativeLayout>
 
 </LinearLayout>
