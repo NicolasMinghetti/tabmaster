@@ -52,9 +52,10 @@ public class MusicAppli {
                 '}';
     }
 
-    public MusicAppli (int id, String owner, Date created, String title, Float num_stars, int num_stars_votes, String tablature){
+    public MusicAppli (int id, String owner, String player, Date created, String title, Float num_stars, int num_stars_votes, String tablature){
         this.id =id;
         this.owner=owner;
+        this.player=player;
         this.created=created;
         this.title=title;
         this.num_stars=num_stars;

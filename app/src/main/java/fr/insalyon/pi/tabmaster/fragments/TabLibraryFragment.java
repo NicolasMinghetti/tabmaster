@@ -6,14 +6,12 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -114,7 +112,7 @@ public class TabLibraryFragment extends android.support.v4.app.Fragment {
                 for (Music elem : music) {
                     System.out.println("Music:"+String.valueOf(elem.getId()));
                     System.out.println("Music:"+elem.getTitle());
-                    tabs.add(new MusicAppli(elem.getId(),elem.getOwner(), elem.getCreated(), elem.getTitle(), elem.getNum_stars(), elem.getNum_stars_votes(), elem.getTablature()));
+                    tabs.add(new MusicAppli(elem.getId(),elem.getOwner(), elem.getPlayer(), elem.getCreated(), elem.getTitle(), elem.getNum_stars(), elem.getNum_stars_votes(), elem.getTablature()));
                     mAdapter = new TabAdapter(tabs);
                     mRecyclerView.setAdapter(mAdapter);
                 }
