@@ -12,6 +12,7 @@ public class Music {
 
     private int id;
     private String owner;
+    private String player;
     private Date created;
     private String title;
     private Float num_stars;
@@ -45,6 +46,8 @@ public class Music {
         return this.tablature;
     }
 
+    public String getPlayer() { return this.player; }
+
     public String getAudio_file() {
         return audio_file;
     }
@@ -70,6 +73,8 @@ public class Music {
     public void setNum_stars_votes(int num_stars_votes) { this.num_stars_votes=num_stars_votes; }
 
     public void setTablature(String tablature) { this.tablature=tablature; }
+
+    public void setPlayer(String player) { this.player=player; }
 
     public void setAudio_file(String audio_file) {
         this.audio_file = audio_file;

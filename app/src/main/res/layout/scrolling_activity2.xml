@@ -91,6 +91,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@id/songTitle"
+        android:background="@drawable/scrollingbgxcf"
+
         android:layout_centerVertical="true"
         android:id="@+id/horizontal_scrollview_id2">
         <LinearLayout
@@ -98,6 +100,7 @@
             android:layout_below="@id/songTitle"
             android:orientation="horizontal"
             android:layout_marginTop="30dp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </LinearLayout>
