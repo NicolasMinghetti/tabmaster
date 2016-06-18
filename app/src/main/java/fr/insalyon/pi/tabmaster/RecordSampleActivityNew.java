@@ -61,7 +61,6 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private String parsedResponse;
 
-    final String url = getResources().getString(R.string.serveur_ip)+"/recup";
     final String filePath = "/sdcard/tabmaster/temp_recording";
 
 
@@ -298,7 +297,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
         private class HttpTabManager extends AsyncTask<Void, Void, Void>{
 
             String dataToSend;
-
+            final String url = getResources().getString(R.string.serveur_ip)+"/recup";
             public HttpTabManager(String dataToSend){
                 this.dataToSend = dataToSend;
             }
