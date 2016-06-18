@@ -65,7 +65,7 @@ public class FacebookConnect extends Activity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                info.setText("You are now connected !");
+                info.setText(" ");
                 returnButton.setVisibility(View.VISIBLE);
             }
 
