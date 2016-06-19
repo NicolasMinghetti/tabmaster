@@ -61,7 +61,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private String parsedResponse;
 
-    final String filePath = "/sdcard/tabmaster/temp_recording";
+    final String filePath = "/sdcard/tabmaster/temp_recording.3gp";
 
 
     @Override
@@ -226,6 +226,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
 
 
                 //set file writing stream
+
                 FileOutputStream os = null;
                 try {
                     os = new FileOutputStream(filePath);
@@ -239,9 +240,12 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                 while (!stopped) {
                     //Read audio data
                     N = recorder.read(audioData, 0, audioData.length);
+                    System.out.println("samples" + Arrays.toString(audioData));
 
                     //Write audio to file
-                    System.out.println("Short wirting to file" + audioData.toString());
+
+                    //System.out.println("Short wirting to file" + audioData.toString());
+
                     try {
                         // // writes the data to file from buffer
                         // // stores the voice buffer
@@ -252,6 +256,8 @@ public class RecordSampleActivityNew extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    System.out.println("samples" + Arrays.toString(audioData));
+
 
 
 
@@ -287,7 +293,7 @@ public class RecordSampleActivityNew extends AppCompatActivity {
             for (int i = 0; i < shortArrsize; i++) {
                 bytes[i * 2] = (byte) (sData[i] & 0x00FF);
                 bytes[(i * 2) + 1] = (byte) (sData[i] >> 8);
-                sData[i] = 0;
+                //sData[i] = 0;
             }
             return bytes;
 

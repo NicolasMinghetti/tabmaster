@@ -67,13 +67,13 @@ public class NewTabDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         String title = titleET.getText().toString();
                         String owner = authorET.getText().toString();
-                        fileName = title.replace(" ","_").replace(" ", "_") + title.replace(" ","_").replace(" ", "_");
+                        fileName = title.replace(" ","_") + "__" + owner.replace(" ","_");
 
                         //rename file
                         try{
                             // create new File objects
                             oldFile = new File(getArguments().getString("audioFileName"));
-                            renamedFile = new File(getArguments().getString("audioFileName").replace("temp_recording", "fileName"));
+                            renamedFile = new File(getArguments().getString("audioFileName").replace("temp_recording", fileName));
 
                             // rename file
                             fbool = oldFile.renameTo(renamedFile);

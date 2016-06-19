@@ -46,6 +46,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         private TextView authorTV;
         private ImageButton deleteBtn;
         private ImageButton playBtn;
+        private ImageButton listenBtn;
         private ImageButton commentsBtn;
         private ImageButton star1;
         private ImageButton star2;
@@ -76,6 +77,7 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
             authorTV = (TextView) itemView.findViewById(R.id.authorTV);
             deleteBtn = (ImageButton) itemView.findViewById(R.id.deleteButton);
             playBtn = (ImageButton) itemView.findViewById(R.id.playButton);
+            listenBtn = (ImageButton) itemView.findViewById(R.id.listenButton);
             commentsBtn = (ImageButton) itemView.findViewById(R.id.commentsButton);
             star1 = (ImageButton) itemView.findViewById(R.id.star1);
             star2 = (ImageButton) itemView.findViewById(R.id.star2);
@@ -120,6 +122,19 @@ public class TabAdapter extends RecyclerView.Adapter<TabAdapter.ViewHolder> {
         final String tablature=tab.getTablature();
         final String owner=tab.getOwner();
         final String titleT=tab.getTitle();
+        viewHolder.playBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent;
+                intent =  new Intent(context, Scrolling.class);
+                intent.putExtra("MusicOwner", owner);
+                intent.putExtra("MusicTitle", titleT);
+                intent.putExtra("MusicTablature", tablature);
+
+                context.startActivity(intent);
+
+            }
+        });
         viewHolder.playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
